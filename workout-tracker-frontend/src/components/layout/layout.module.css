@@ -1,0 +1,58 @@
+.nav {
+    background-color: #191919;
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    z-index: 100;
+}
+
+.navLink {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.navLink:hover{
+    color: lightgray;
+}
+
+.navbarToggler {
+    border: none !important;
+}
+
+.footer{
+    background-color: #191919;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footerText{
+    text-align: center;
+    color: white;
+    padding: 10px;
+    margin-top: 0;
+    font-size: 15px;
+}
+
+.footerLink{
+    text-decoration: none;
+    color: white;
+    margin-bottom: 0;
+}
+
+.logoText{
+    font-family: 'Antic Didone', serif;
+    margin-left: 5px;
+}
+
+.logoText a{
+    text-decoration: none;
+    color: white;
+}
+
+.active{
+    text-decoration: underline;
+    color: dimgrey;
+}
