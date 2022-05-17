@@ -23,7 +23,7 @@ const Login = () =>{
         <main className="main">
             <h1 className={classes.textCenter}>Sign in</h1>
             <h3 className={classes.textCenter}>Welcome back, please log in to continue</h3>
-            <h3 id="register" className={classes.textCenter}>If you don't already have an account, <Link to="/register" style={linkStyle}>register here</Link> </h3>
+            <h3 id="register" className={classes.textCenter}>If you don't already have an account, <Link to="/registration" style={linkStyle}>register here</Link> </h3>
             <form className={classes.form}>
                 <input type="email" placeholder="Your email" value={email} onChange={emailChangeHandler}/>
                 <input type="password" placeholder="Your password" value={password} onChange={passwordChangeHandler}/>
