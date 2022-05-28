@@ -95,7 +95,7 @@ const Registration = (props) =>{
             .then(res =>{
                     if(res.status === 200){
                         setIsLoading(false);
-                        alert("Registration request submitted successfully.");
+                        alert("We sent you a confirmation mail. Check your inbox.");
                         navigate("/login");
                     }
                 }
