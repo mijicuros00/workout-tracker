@@ -29,4 +29,9 @@ public class AuthController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping(value = "/confirm")
+    public String confirmToken(@RequestParam(value = "token") String token) {
+        return registrationService.confirmToken(token);
+    }
 }

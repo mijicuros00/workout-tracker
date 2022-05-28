@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -116,15 +117,30 @@ public class RegistrationServiceImplementation implements RegistrationService {
         ConfirmationToken confirmationToken = new ConfirmationToken(token, null, registeredUser);
         confirmationTokenService.save(confirmationToken);
 
-        String link = "https://localhost:8080/api/auth/confirm?token=" + confirmationToken.getToken();
+        String link = "http://localhost:8080/api/auth/confirm?token=" + confirmationToken.getToken();
         emailSenderService.send(registeredUser.getEmail(), emailSenderService.registerEmail(registeredUser.getFirstName(), link), "Verify your email");
 
         return token;
     }
 
+    @Transactional
     @Override
     public String confirmToken(String token) {
-        return null;
+        ConfirmationToken confirmationToken = confirmationTokenService.findByToken(token);
+        User user = userService.findUserById(confirmationToken.getUser().getId());
+
+        if (confirmationToken.getConfirmedAt() != null) {
+            throw new IllegalStateException("email already confirmed");
+        }
+
+        confirmationToken.setConfirmedAt(LocalDateTime.now());
+
+        confirmationTokenService.save(confirmationToken);
+
+        user.setStatus(EStatus.VERIFIED);
+        userService.save(user);
+
+        return "Email " + user.getEmail() + " successfully confirmed!";
     }
 }
 
