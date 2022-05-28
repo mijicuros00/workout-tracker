@@ -2,6 +2,7 @@ import classes from "./authorization.module.css";
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import axios from 'axios';
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Registration = (props) =>{
 
@@ -16,6 +17,7 @@ const Registration = (props) =>{
     const [gender, setGender] = useState("MALE");
     const [unit, setUnit] = useState("metric");
 
+    const [isLoading, setIsLoading] = useState(false);
     let navigate  = useNavigate();
 
     const firstNameChangeHandler = e =>{
@@ -88,14 +90,18 @@ const Registration = (props) =>{
             height: heightInCms,
             gender: gender
         };
+        setIsLoading(true);
         axios.post("http://localhost:8080/api/auth/registration", registeredUser)
             .then(res =>{
                     if(res.status === 200){
+                        setIsLoading(false);
+                        alert("Registration request submitted successfully.");
                         navigate("/login");
                     }
                 }
             ).catch(err =>{
                 console.log(err);
+                setIsLoading(false);
                 alert("Something went wrong!")
         })
     }
@@ -105,33 +111,40 @@ const Registration = (props) =>{
         color: "#b2d0df"
     }
 
+    const loaderCss = {
+        position: "absolute",
+        left: "45%",
+        top: "50%"
+    }
+
     return(
         <main className="main">
             <h1 className={classes.textCenter}>Registration</h1>
             <h3 className={classes.textCenter}>Welcome, please register to continue to app</h3>
             <h3 id="register" className={classes.textCenter}>If you already have an account, <Link to="/login" style={linkStyle}>go to login page</Link> </h3>
-            <form className={classes.form} onSubmit={submitHandler}>
-                <input type="text" placeholder="Your first name" value={firstName} onChange={firstNameChangeHandler}/>
-                <input type="text" placeholder="Your last name" value={lastName} onChange={lastNameChangeHandler}/>
-                <input type="email" placeholder="Your email" value={email} onChange={emailChangeHandler}/>
-                <input type="password" placeholder="Your password" value={password} onChange={passwordChangeHandler}/>
-                <input type="password" placeholder="Repeat your password password" value={repeatedPassword} onChange={repeatedPasswordChangeHandler}/>
-                <input type="number" step={1} placeholder="Your Age" value={age} onChange={ageChangeHandler}/>
-                <label>Select unit type:</label>
-                <div className={classes.radioDiv}>
-                    Metric(Kgs and centimeters) <input type="radio" value="metric" name="unit" onClick={(e) => setUnit("metric")} defaultChecked/>
-                    <br/>
-                    Imperial(lbs and inches)<input type="radio" value="imperial" name="unit" onClick={(e) => setUnit("imperial")} />
-                </div>
-                <input type="number" step={1} placeholder="Your weight" value={weight} onChange={weightChangeHandler}/>
-                <input type="number" step={1} placeholder="Your height" value={height} onChange={heightChangeHandler}/>
-                <select defaultValue="male" onChange={genderChangeHandler}>
-                    <option disabled>Select gender</option>
-                    <option value="MALE">Male</option>
-                    <option value="FEMALE">Female</option>
-                </select>
-                <input type="submit" value="Submit"/>
-            </form>
+            {isLoading ? <ClipLoader color={"white"} loading={isLoading} css={loaderCss} size={150} /> :
+                <form className={classes.form} onSubmit={submitHandler}>
+                    <input type="text" placeholder="Your first name" value={firstName} onChange={firstNameChangeHandler}/>
+                    <input type="text" placeholder="Your last name" value={lastName} onChange={lastNameChangeHandler}/>
+                    <input type="email" placeholder="Your email" value={email} onChange={emailChangeHandler}/>
+                    <input type="password" placeholder="Your password" value={password} onChange={passwordChangeHandler}/>
+                    <input type="password" placeholder="Repeat your password password" value={repeatedPassword} onChange={repeatedPasswordChangeHandler}/>
+                    <input type="number" step={1} placeholder="Your Age" value={age} onChange={ageChangeHandler}/>
+                    <label>Select unit type:</label>
+                    <div className={classes.radioDiv}>
+                        Metric(Kgs and centimeters) <input type="radio" value="metric" name="unit" onClick={(e) => setUnit("metric")} defaultChecked/>
+                        <br/>
+                        Imperial(lbs and inches)<input type="radio" value="imperial" name="unit" onClick={(e) => setUnit("imperial")} />
+                    </div>
+                    <input type="number" step={1} placeholder="Your weight" value={weight} onChange={weightChangeHandler}/>
+                    <input type="number" step={1} placeholder="Your height" value={height} onChange={heightChangeHandler}/>
+                    <select defaultValue="male" onChange={genderChangeHandler}>
+                        <option disabled>Select gender</option>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                    </select>
+                    <input type="submit" value="Submit" disabled={isLoading}/>
+                </form>}
         </main>
     );
 }
