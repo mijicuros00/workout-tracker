@@ -1,8 +1,9 @@
 import classes from "./authorization.module.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
+import axios from 'axios';
 
-const Registration = () =>{
+const Registration = (props) =>{
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -12,8 +13,10 @@ const Registration = () =>{
     const [age, setAge] = useState();
     const [weight, setWeight] = useState();
     const [height, setHeight] = useState();
-    const [gender, setGender] = useState("male");
+    const [gender, setGender] = useState("MALE");
     const [unit, setUnit] = useState("metric");
+
+    let navigate  = useNavigate();
 
     const firstNameChangeHandler = e =>{
         setFirstName(e.target.value);
@@ -51,10 +54,51 @@ const Registration = () =>{
         setGender(e.target.value);
     }
 
-    const unitChangeHandler = e =>{
-        setUnit(e.target.value);
-    }
 
+    const submitHandler = e =>{
+        e.preventDefault();
+        if(firstName.trim().length < 1 || lastName.trim().length < 1 || password.trim().length < 6 || repeatedPassword.trim().length < 1){
+            alert("Form isn't filled correctly!")
+            return;
+        }else if(password !== repeatedPassword){
+            alert("Password need to match!");
+            return;
+        }
+
+        let weightInKgs;
+        let heightInCms;
+        if(unit === "imperial"){
+            weightInKgs = weight/2.2046;
+            heightInCms = height*2.54;
+            localStorage.setItem("units", "imperial");
+        }else{
+            weightInKgs = weight;
+            heightInCms = height;
+            localStorage.setItem("units", "metric");
+        }
+
+        let registeredUser = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+            repeatedPassword: repeatedPassword,
+            age: age,
+            weight: weightInKgs,
+            height: heightInCms,
+            gender: gender
+        };
+        axios.post("http://localhost:8080/api/auth/registration", registeredUser)
+            .then(res =>{
+                    if(res.status === 200){
+                        navigate("/login");
+                    }
+                }
+            ).catch(err =>{
+                console.log(err);
+                alert("Something went wrong!")
+        })
+    }
 
 
     const linkStyle = {
@@ -66,7 +110,7 @@ const Registration = () =>{
             <h1 className={classes.textCenter}>Registration</h1>
             <h3 className={classes.textCenter}>Welcome, please register to continue to app</h3>
             <h3 id="register" className={classes.textCenter}>If you already have an account, <Link to="/login" style={linkStyle}>go to login page</Link> </h3>
-            <form className={classes.form}>
+            <form className={classes.form} onSubmit={submitHandler}>
                 <input type="text" placeholder="Your first name" value={firstName} onChange={firstNameChangeHandler}/>
                 <input type="text" placeholder="Your last name" value={lastName} onChange={lastNameChangeHandler}/>
                 <input type="email" placeholder="Your email" value={email} onChange={emailChangeHandler}/>
@@ -75,16 +119,16 @@ const Registration = () =>{
                 <input type="number" step={1} placeholder="Your Age" value={age} onChange={ageChangeHandler}/>
                 <label>Select unit type:</label>
                 <div className={classes.radioDiv}>
-                    Metric(Kgs and meters) <input type="radio" value="metric" name="unit" onClick={(e) => setUnit("metric")} defaultChecked/>
+                    Metric(Kgs and centimeters) <input type="radio" value="metric" name="unit" onClick={(e) => setUnit("metric")} defaultChecked/>
                     <br/>
-                    Imperial(lbs and miles)<input type="radio" value="imperial" name="unit" onClick={(e) => setUnit("imperial")} />
+                    Imperial(lbs and inches)<input type="radio" value="imperial" name="unit" onClick={(e) => setUnit("imperial")} />
                 </div>
                 <input type="number" step={1} placeholder="Your weight" value={weight} onChange={weightChangeHandler}/>
                 <input type="number" step={1} placeholder="Your height" value={height} onChange={heightChangeHandler}/>
                 <select defaultValue="male" onChange={genderChangeHandler}>
                     <option disabled>Select gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
                 </select>
                 <input type="submit" value="Submit"/>
             </form>
