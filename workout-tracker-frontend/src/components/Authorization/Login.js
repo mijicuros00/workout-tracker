@@ -1,5 +1,5 @@
 import classes from './authorization.module.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import axios from "axios";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -10,6 +10,8 @@ const Login = () =>{
     const [password, setPassword] = useState("");
 
     const [isLoading, setIsLoading] = useState(false);
+
+    let navigate  = useNavigate();
 
     const emailChangeHandler = e =>{
         setEmail(e.target.value);
@@ -51,6 +53,7 @@ const Login = () =>{
                 console.log(res);
                 localStorage.setItem("workoutTrackerAccessToken", res.data);
                 setIsLoading(false);
+                navigate("/profile");
             }).catch(err =>{
                 console.log(err);
                 setIsLoading(false);

@@ -12,10 +12,10 @@ const Header = () =>{
             <Navbar.Toggle className={classes.navbarToggler}/>
             <Navbar.Collapse >
                 <Nav className="ms-auto">
-                    <NavLink to="/profile" className={classes.navLink} activeClassName={classes.active}>Profile</NavLink>
-                    <NavLink to="/workouts" className={classes.navLink} activeClassName={classes.active}>Workouts</NavLink>
-                    <NavLink to="/exercises" className={classes.navLink} activeClassName={classes.active}>Exercises</NavLink>
-                    <NavLink to="/statistics" className={classes.navLink} activeClassName={classes.active}>My statistics</NavLink>
+                    <NavLink to="/profile" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>Profile</NavLink>
+                    <NavLink to="/workouts" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>Workouts</NavLink>
+                    <NavLink to="/exercises" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>Exercises</NavLink>
+                    <NavLink to="/statistics" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>My statistics</NavLink>
                 </Nav>
             </Navbar.Collapse>
 

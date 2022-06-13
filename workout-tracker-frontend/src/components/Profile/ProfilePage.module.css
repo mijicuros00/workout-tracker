@@ -1,0 +1,19 @@
+.main{
+    margin-top: 15vh;
+   text-align: center;
+}
+
+.title{
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.section{
+    margin-bottom: 20vh;
+    margin-top: 15vh;
+    font-size: 20px;
+}
+
+input[type = 'radio']{
+    margin-bottom: 20px;
+}
