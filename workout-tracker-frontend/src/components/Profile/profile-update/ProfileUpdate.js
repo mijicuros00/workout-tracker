@@ -3,6 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import UserService from "../../../services/user-service";
 
 const kgLbsRatio = 2.2046;
 const cmInchRatio = 2.54;
@@ -22,26 +23,27 @@ const ProfileUpdate = () =>{
 
     useEffect(() => {
         setIsLoading(true);
-        axios.get("/users/token")
+        UserService.getUserFromToken()
             .then(response =>{
-                setId(response.data.id);
-                setFirstName(response.data.firstName);
-                setLastName(response.data.lastName);
-                setEmail(response.data.email);
-                setAge(response.data.age);
+                setId(response.id);
+                setFirstName(response.firstName);
+                setLastName(response.lastName);
+                setEmail(response.email);
+                setAge(response.age);
                 if(localStorage.getItem("units") === "metric"){
-                    setWeight(response.data.weight);
-                    setHeight(response.data.height);
+                    setWeight(response.weight);
+                    setHeight(response.height);
                 }else{
-                    setWeight((response.data.weight * kgLbsRatio).toFixed(2));
-                    setHeight((response.data.height / cmInchRatio).toFixed(0));
+                    setWeight((response.weight * kgLbsRatio).toFixed(2));
+                    setHeight((response.height / cmInchRatio).toFixed(0));
                 }
                 setIsLoading(false);
-            }).catch(err =>{
+            }).catch(err => {
             console.log(err);
             alert("Something went wrong!");
             setIsLoading(false);
-        })
+        });
+
 
     }, [])
 
@@ -94,17 +96,16 @@ const ProfileUpdate = () =>{
             weight: weightInKgs
         }
         setIsLoading(true);
-        axios.put("/users/" + id, updatedUser)
-            .then(response =>{
-                if(response.status === 200){
+        UserService.updateUser(id, updatedUser)
+            .then(response => {
+                if(response){
                     setIsLoading(false);
-                    navigate("/profile")
+                    navigate("/profile");
                 }
-            }).catch(err =>{
-                console.log(err);
+            }).catch(() => {
             setIsLoading(false);
             alert("something went wrong!");
-        })
+        });
 
     }
 

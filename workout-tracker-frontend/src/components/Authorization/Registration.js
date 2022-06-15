@@ -3,6 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import axios from "./AuthAxios";
 import ClipLoader from "react-spinners/ClipLoader";
+import authService from "../../services/auth-service";
 
 const kgLbsRatio = 2.2046;
 const cmInchRatio = 2.54;
@@ -94,19 +95,18 @@ const Registration = (props) =>{
             gender: gender
         };
         setIsLoading(true);
-        axios.post("/auth/registration", registeredUser)
-            .then(res =>{
-                    if(res.status === 200){
-                        setIsLoading(false);
-                        alert("We sent you a confirmation mail. Check your inbox.");
-                        navigate("/login");
-                    }
+        authService.registration(registeredUser)
+            .then(response => {
+                if(response){
+                    setIsLoading(false);
+                    alert("We sent you a confirmation mail. Check your inbox.");
+                    navigate("/login");
                 }
-            ).catch(err =>{
-                console.log(err);
-                setIsLoading(false);
-                alert("Something went wrong!")
+            }).catch(() => {
+            setIsLoading(false);
+            alert("Something went wrong!");
         })
+
     }
 
 

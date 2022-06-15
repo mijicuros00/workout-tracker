@@ -3,6 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "./AuthAxios";
 import ClipLoader from "react-spinners/ClipLoader";
+import authService from "../../services/auth-service";
 
 const Login = () =>{
 
@@ -48,16 +49,18 @@ const Login = () =>{
         }
 
         setIsLoading(true);
-        axios.post("/auth/login", loginRequest)
-            .then(res =>{
-                console.log(res);
-                localStorage.setItem("workoutTrackerAccessToken", res.data);
-                setIsLoading(false);
-                navigate("/profile");
-            }).catch(err =>{
-                console.log(err);
+        authService.login(loginRequest)
+            .then(response => {
+                if(response){
+                    setIsLoading(false);
+                    navigate("/profile");
+                    return;
+                }
                 setIsLoading(false);
                 alert("Email or password are incorrect!");
+            }).catch(() => {
+            setIsLoading(false);
+            alert("Email or password are incorrect!");
         })
 
     }

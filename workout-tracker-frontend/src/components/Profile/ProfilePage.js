@@ -3,8 +3,8 @@ import classes from './ProfilePage.module.css';
 import {useEffect, useState} from "react";
 import {Button} from 'react-bootstrap';
 import {Link} from "react-router-dom";
-import axios from "axios";
 import ClipLoader from "react-spinners/ClipLoader";
+import UserService from "../../services/user-service";
 
 const kgLbsRatio = 2.2046;
 const cmInchRatio = 2.54;
@@ -17,15 +17,16 @@ const ProfilePage = () =>{
 
     useEffect(() => {
         setIsLoading(true);
-        axios.get("/users/token")
-            .then(response =>{
-                setUser(response.data);
+        UserService.getUserFromToken()
+            .then(res => {
+                setUser(res);
                 setIsLoading(false);
-            }).catch(err =>{
-                console.log(err);
-                alert("Something went wrong!");
-            setIsLoading(false);
-        })
+            })
+            .catch(() => {
+                alert("something went wrong!");
+                setIsLoading(false);
+            });
+
 
     }, [])
 
