@@ -1,7 +1,7 @@
 import classes from './authorization.module.css';
 import {Link, useNavigate} from "react-router-dom";
-import {useState} from "react";
-import axios from "axios";
+import {useEffect, useState} from "react";
+import axios from "./AuthAxios";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const Login = () =>{
@@ -48,7 +48,7 @@ const Login = () =>{
         }
 
         setIsLoading(true);
-        axios.post("http://localhost:8080/api/auth/login", loginRequest)
+        axios.post("/auth/login", loginRequest)
             .then(res =>{
                 console.log(res);
                 localStorage.setItem("workoutTrackerAccessToken", res.data);
@@ -64,7 +64,7 @@ const Login = () =>{
 
     const loaderCss = {
         position: "absolute",
-        left: "45%",
+        left: "40%",
         top: "50%"
     }
 

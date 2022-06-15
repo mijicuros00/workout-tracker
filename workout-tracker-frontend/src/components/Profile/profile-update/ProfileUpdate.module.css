@@ -36,22 +36,10 @@ input[type = "submit"]:hover{
     border: 1px solid white;
 }
 
-input[type = "radio"]{
-    display: inline-block;
+h5{
+    width: 70%;
+    margin: 20px auto;
 }
-
-.radioDiv{
-    margin-left: 10vw;
-}
-
-.label{
-    color: white;
-}
-
-option{
-    color: black;
-}
-
 
 @media (min-width: 1000px) {
     .form{
@@ -65,5 +53,3 @@ option{
 
 
 }
-
-

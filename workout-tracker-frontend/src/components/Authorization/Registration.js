@@ -1,8 +1,11 @@
 import classes from "./authorization.module.css";
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
-import axios from 'axios';
+import axios from "./AuthAxios";
 import ClipLoader from "react-spinners/ClipLoader";
+
+const kgLbsRatio = 2.2046;
+const cmInchRatio = 2.54;
 
 const Registration = (props) =>{
 
@@ -70,8 +73,8 @@ const Registration = (props) =>{
         let weightInKgs;
         let heightInCms;
         if(unit === "imperial"){
-            weightInKgs = weight/2.2046;
-            heightInCms = height*2.54;
+            weightInKgs = weight/kgLbsRatio;
+            heightInCms = height*cmInchRatio;
             localStorage.setItem("units", "imperial");
         }else{
             weightInKgs = weight;
@@ -91,7 +94,7 @@ const Registration = (props) =>{
             gender: gender
         };
         setIsLoading(true);
-        axios.post("http://localhost:8080/api/auth/registration", registeredUser)
+        axios.post("/auth/registration", registeredUser)
             .then(res =>{
                     if(res.status === 200){
                         setIsLoading(false);
