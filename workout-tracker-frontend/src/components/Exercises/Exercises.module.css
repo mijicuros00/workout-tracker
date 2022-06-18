@@ -20,6 +20,16 @@
     -moz-box-shadow: 0px 0px 4px 1px rgba(256,256,256,0.7);
 }
 
+.select{
+    background-color: #3b3b3b;
+    color: white;
+    border-radius: 15px;
+}
+
+.option{
+    color: white;
+}
+
 .exercise{
     border-radius: 15px;
     margin: 15px auto !important;
@@ -36,3 +46,8 @@
     -webkit-box-shadow: 0px 0px 4px 1px white;
     -moz-box-shadow: 0px 0px 4px 1px white;
 }
+
+/*.pageItem{*/
+/*    background-color: black;*/
+/*    color: white;*/
+/*}*/

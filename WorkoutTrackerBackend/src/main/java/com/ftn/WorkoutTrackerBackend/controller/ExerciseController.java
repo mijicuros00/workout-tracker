@@ -3,6 +3,7 @@ package com.ftn.WorkoutTrackerBackend.controller;
 import com.ftn.WorkoutTrackerBackend.entity.dto.ExerciseDTO;
 import com.ftn.WorkoutTrackerBackend.entity.mapper.ExerciseMapper;
 import com.ftn.WorkoutTrackerBackend.entity.model.Exercise;
+import com.ftn.WorkoutTrackerBackend.entity.model.MuscleGroup;
 import com.ftn.WorkoutTrackerBackend.service.ExerciseService;
 import com.ftn.WorkoutTrackerBackend.service.MuscleGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,18 @@ public class ExerciseController {
     @GetMapping
     public ResponseEntity<List<ExerciseDTO>> getAll(Pageable pageable, @RequestParam(value = "search", defaultValue = "") String search, @RequestParam(required = false) Long muscleGroupId){
 
-        Page<Exercise> exercises = exerciseService.findExercisesByNameIsContaining(search, pageable);
+        Page<Exercise> exercises = null;
+        
+        if(muscleGroupId == 0){
+            exercises = exerciseService.findExercisesByNameIsContaining(search, pageable);
+        }else{
+            MuscleGroup muscleGroup = muscleGroupService.findMuscleGroupById(muscleGroupId);
+            if(muscleGroup != null){
+                exercises = exerciseService.findExercisesByNameIsContainingAndMuscleGroupsContaining(search, pageable, muscleGroup);
+            }else{
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
 
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Access-Control-Expose-Headers", "X-Paging-Page,X-Paging-PageSize,X-Paging-PageCount,X-Paging-TotalRecordCount");

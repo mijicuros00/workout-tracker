@@ -6,11 +6,18 @@ import com.ftn.WorkoutTrackerBackend.service.MuscleGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MuscleGroupServiceImplementation implements MuscleGroupService {
 
     @Autowired
     private MuscleGroupRepository muscleGroupRepository;
+
+    @Override
+    public List<MuscleGroup> findAll() {
+        return muscleGroupRepository.findAll();
+    }
 
     @Override
     public MuscleGroup findMuscleGroupById(Long id) {
