@@ -5,6 +5,7 @@ import {Button} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import UserService from "../../services/user-service";
+import ProfileSettings from "./ProfileSettings";
 
 const kgLbsRatio = 2.2046;
 const cmInchRatio = 2.54;
@@ -60,21 +61,7 @@ const ProfilePage = () =>{
                     <h3>{user.gender}</h3>
                     <Button variant="dark"><Link to="/profile/update" style={linkStyle}>Update profile
                         information</Link></Button>
-                    <section className={classes.section}>
-                        <h2 className={classes.title}>Profile settings</h2>
-                        <label>Select unit type:</label>
-                        <div>
-                            Metric(Kgs and centimeters) <input type="radio" value="metric" name="unit" onClick={() => {
-                            localStorage.setItem("units", "metric");
-                            setUnit("metric");
-                        }} checked={localStorage.getItem("units") === "metric"}/>
-                            <br/>
-                            Imperial(lbs and inches)<input type="radio" value="imperial" name="unit" onClick={() => {
-                            localStorage.setItem("units", "imperial");
-                            setUnit("imperial");
-                        }} checked={localStorage.getItem("units") === "imperial"}/>
-                        </div>
-                    </section>
+                    <ProfileSettings set={setUnit}/>
                 </main>}
         </StandardLayout>
     );
