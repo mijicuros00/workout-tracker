@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Setter
 @Builder
 @Entity
-public class BodyPart {
+public class MuscleGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

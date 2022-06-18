@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @Builder
 @Entity
-public class Excercise {
+public class Exercise {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -23,5 +23,5 @@ public class Excercise {
     private String picutre;
 
     @ManyToMany
-    private List<BodyPart> bodyParts;
+    private List<MuscleGroup> muscleGroups;
 }
