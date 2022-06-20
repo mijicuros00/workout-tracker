@@ -9,10 +9,10 @@ const Exercise = props =>{
     return (
         <Row className={classes.exercise}>
             <Col lg={4} md={3} sm={12} xs={12} className="my-auto">
-                <span>{props.name}</span>
+                <span className={classes.name}>{props.name}</span>
             </Col>
             <Col lg={4} md={3} sm={12} xs={12} className="my-auto">
-                <span>{props.description}</span>
+                <span className={classes.description}>{props.description}</span>
             </Col>
             <Col lg={4} md={3} sm={12} xs={12} className="my-auto">
                 <span>{muscleGroups.substr(0, muscleGroups.length-2)}</span>

@@ -1,6 +1,7 @@
 package com.ftn.WorkoutTrackerBackend.controller;
 
 import com.ftn.WorkoutTrackerBackend.entity.dto.ExerciseDTO;
+import com.ftn.WorkoutTrackerBackend.entity.dto.ExerciseRequestDTO;
 import com.ftn.WorkoutTrackerBackend.entity.mapper.ExerciseMapper;
 import com.ftn.WorkoutTrackerBackend.entity.model.Exercise;
 import com.ftn.WorkoutTrackerBackend.entity.model.MuscleGroup;
@@ -12,9 +13,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -51,5 +55,25 @@ public class ExerciseController {
         responseHeaders.set("X-Paging-TotalRecordCount", String.valueOf(exercises.getTotalElements()));
 
         return new ResponseEntity<>(ExerciseMapper.mapListToDTO(exercises.getContent()), responseHeaders, HttpStatus.OK);
+    }
+
+    @PostMapping(consumes = { "multipart/form-data" })
+    @Transactional
+    public ResponseEntity<Long> createExercise(@ModelAttribute ExerciseRequestDTO exerciseRequestDTO){
+
+        List<MuscleGroup> muscleGroups = exerciseRequestDTO.getMuscleGroupsIdList().stream()
+                .map(id -> muscleGroupService.findMuscleGroupById(id))
+                .collect(Collectors.toList());
+
+        Exercise exercise = ExerciseMapper.mapRequestDTOToModel(exerciseRequestDTO, muscleGroups);
+        Long id = exerciseService.save(exercise).getId();
+
+        String location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(id)
+                .toUriString();
+
+        return ResponseEntity.status(HttpStatus.CREATED).header(HttpHeaders.LOCATION, location).body(id);
     }
 }

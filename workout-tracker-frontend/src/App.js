@@ -5,6 +5,7 @@ import Login from "./components/Authorization/Login";
 import Registration from "./components/Authorization/Registration";
 import ProfileUpdate from "./components/Profile/profile-update/ProfileUpdate";
 import Exercises from "./components/Exercises/Exercises";
+import ExerciseForm from "./components/Exercises/ExerciseForm";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage/>}/>
             <Route path="/profile/update" element={<ProfileUpdate/>}/>
             <Route path="/exercises" element={<Exercises/>}/>
+            <Route path="/exercises/form" element={<ExerciseForm/>}/>
         </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,9 @@
 package com.ftn.WorkoutTrackerBackend.entity.mapper;
 
 import com.ftn.WorkoutTrackerBackend.entity.dto.ExerciseDTO;
+import com.ftn.WorkoutTrackerBackend.entity.dto.ExerciseRequestDTO;
 import com.ftn.WorkoutTrackerBackend.entity.model.Exercise;
+import com.ftn.WorkoutTrackerBackend.entity.model.MuscleGroup;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +15,7 @@ public class ExerciseMapper {
                 .id(exerciseDTO.getId())
                 .name(exerciseDTO.getName())
                 .description(exerciseDTO.getDescription())
-                .picutre(exerciseDTO.getPicutre())
+                .image(exerciseDTO.getImage())
                 .muscleGroups(exerciseDTO.getMuscleGroups())
                 .build();
     }
@@ -23,8 +25,17 @@ public class ExerciseMapper {
                 .id(exercise.getId())
                 .name(exercise.getName())
                 .description(exercise.getDescription())
-                .picutre(exercise.getPicutre())
+                .image(exercise.getImage())
                 .muscleGroups(exercise.getMuscleGroups())
+                .build();
+    }
+
+    public static Exercise mapRequestDTOToModel(ExerciseRequestDTO exerciseRequestDTO, List<MuscleGroup> muscleGroups){
+        return Exercise.builder()
+                .name(exerciseRequestDTO.getName())
+                .description(exerciseRequestDTO.getDescription())
+                .image(exerciseRequestDTO.getImage())
+                .muscleGroups(muscleGroups)
                 .build();
     }
 

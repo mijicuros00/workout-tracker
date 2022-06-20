@@ -19,8 +19,8 @@ public class Exercise {
     private String name;
     private String description;
 
-    @Column(name = "picture", columnDefinition = "MEDIUMBLOB")
-    private String picutre;
+    @Column(name = "image", columnDefinition = "MEDIUMBLOB")
+    private String image;
 
     @ManyToMany
     private List<MuscleGroup> muscleGroups;
