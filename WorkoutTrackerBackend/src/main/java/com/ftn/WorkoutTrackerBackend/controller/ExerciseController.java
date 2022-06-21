@@ -57,6 +57,19 @@ public class ExerciseController {
         return new ResponseEntity<>(ExerciseMapper.mapListToDTO(exercises.getContent()), responseHeaders, HttpStatus.OK);
     }
 
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ExerciseDTO> getOne(@PathVariable Long id){
+        Exercise exercise = exerciseService.findExerciseById(id);
+
+        if(exercise == null){
+            System.out.println("no exercise with id = " + id);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(ExerciseMapper.mapDTO(exercise), HttpStatus.OK);
+    }
+
     @PostMapping(consumes = { "multipart/form-data" })
     @Transactional
     public ResponseEntity<Long> createExercise(@ModelAttribute ExerciseRequestDTO exerciseRequestDTO){

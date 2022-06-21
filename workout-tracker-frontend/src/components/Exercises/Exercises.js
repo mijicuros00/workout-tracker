@@ -58,7 +58,7 @@ const Exercises = () =>{
         top: "50%"
     }
 
-    let exerciseList = exercises.map(exercise => <Exercise key={exercise.id} name={exercise.name} description={exercise.description} muscleGroups={exercise.muscleGroups} />)
+    let exerciseList = exercises.map(exercise => <Exercise key={exercise.id} id={exercise.id} name={exercise.name} description={exercise.description} muscleGroups={exercise.muscleGroups} />)
 
     return(
         <StandardLayout>

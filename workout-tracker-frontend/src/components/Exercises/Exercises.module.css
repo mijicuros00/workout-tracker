@@ -7,6 +7,11 @@
     text-align: center;
 }
 
+.exerciseName{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
 .search{
     border-radius: 15px;
     background-color: #3b3b3b;

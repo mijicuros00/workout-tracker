@@ -1,9 +1,9 @@
-import StandardLayout from "../layout/StandardLayout";
-import classes from "./Exercises.module.css";
+import StandardLayout from "../../layout/StandardLayout";
+import classes from "../Exercises.module.css";
 import {useEffect, useState} from "react";
-import TextArea from "../util/TextArea";
-import MuscleGroupService from "../../services/muscle-group-service";
-import ExerciseService from "../../services/exercise-service";
+import TextArea from "../../util/TextArea";
+import MuscleGroupService from "../../../services/muscle-group-service";
+import ExerciseService from "../../../services/exercise-service";
 import {useNavigate} from "react-router-dom";
 
 const ExerciseForm = () =>{

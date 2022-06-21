@@ -6,6 +6,12 @@ const getAll = (page, size, search, muscleGroup) =>{
         .catch(err => console.log(err));
 }
 
+const getOne = id =>{
+    return axios.get(`/exercises/${id}`)
+        .then(response => response)
+        .catch(err => console.log(err));
+}
+
 const create = (data) =>{
     let formData = new FormData();
     formData.append('name', data.name);
@@ -27,7 +33,8 @@ const create = (data) =>{
 
 const ExerciseService = {
     getAll,
-    create
+    create,
+    getOne
 };
 
 export default ExerciseService;

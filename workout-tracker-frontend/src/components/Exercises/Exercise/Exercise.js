@@ -1,13 +1,14 @@
 import {Col, Row} from "react-bootstrap";
 import classes from "../Exercises.module.css";
+import {useNavigate} from "react-router-dom";
 
 const Exercise = props =>{
 
-
+    let navigate = useNavigate();
     let muscleGroups = props.muscleGroups.map(group => group.name + ", ").toString();
 
     return (
-        <Row className={classes.exercise}>
+        <Row className={classes.exercise} onClick={() => navigate(`/exercises/${props.id}`)}>
             <Col lg={4} md={3} sm={12} xs={12} className="my-auto">
                 <span className={classes.name}>{props.name}</span>
             </Col>
