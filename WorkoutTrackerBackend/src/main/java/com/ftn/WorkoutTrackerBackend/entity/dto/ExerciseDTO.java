@@ -16,4 +16,5 @@ public class ExerciseDTO {
     private String description;
     private String image;
     private List<MuscleGroup> muscleGroups;
+    private boolean custom;
 }

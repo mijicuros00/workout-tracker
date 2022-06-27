@@ -1,11 +1,11 @@
 package com.ftn.WorkoutTrackerBackend.controller;
 
-import com.ftn.WorkoutTrackerBackend.entity.model.Exercise;
-import com.ftn.WorkoutTrackerBackend.entity.model.MuscleGroup;
+import com.ftn.WorkoutTrackerBackend.entity.model.*;
 import com.ftn.WorkoutTrackerBackend.service.ExerciseService;
 import com.ftn.WorkoutTrackerBackend.service.MuscleGroupService;
 import com.ftn.WorkoutTrackerBackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,10 +26,16 @@ public class DatabaseController {
     @Autowired
     private ExerciseService exerciseService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping(value = "/create")
     @Transactional
-    public void createDb(){
+    public String createDb(){
 
         MuscleGroup muscleGroup = new MuscleGroup(1L, "Chest");
         MuscleGroup muscleGroup2 = new MuscleGroup(2L, "Shoulders");
@@ -75,6 +81,18 @@ public class DatabaseController {
         exerciseService.save(exercise4);
         exerciseService.save(exercise5);
         exerciseService.save(exercise6);
+
+        User user = new User(1L, "Pera", "Peric", "pera@gmail.com", passwordEncoder.encode("123123"), 30, 80, 177, EGender.MALE, ERole.ADMINISTRATOR, EStatus.VERIFIED );
+        User user2 = new User(2L, "Steva", "Stevic", "steva@gmail.com", passwordEncoder.encode("123123"), 30, 80, 177, EGender.MALE, ERole.USER, EStatus.VERIFIED );
+        User user3 = new User(3L, "Mitar", "Mitrovic", "mitar@gmail.com", passwordEncoder.encode("123123"), 30, 80, 177, EGender.MALE, ERole.USER, EStatus.VERIFIED );
+        User user4 = new User(4L, "Mika", "Mikic", "mika@gmail.com", passwordEncoder.encode("123123"), 30, 80, 177, EGender.MALE, ERole.USER, EStatus.VERIFIED );
+
+        userService.save(user);
+        userService.save(user2);
+        userService.save(user3);
+        userService.save(user4);
+
+        return "Successfully created database";
     }
 
     @GetMapping(value = "/hello")

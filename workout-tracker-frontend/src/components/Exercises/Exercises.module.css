@@ -35,6 +35,24 @@
     color: white;
 }
 
+.newButton{
+    border-radius: 15px;
+    margin: 15px auto !important;
+    padding: 10px;
+    text-align: center;
+    background-color: #3b3b3b;
+    box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    color: #000000
+}
+
+.newButton:hover{
+    box-shadow: 0px 0px 4px 1px white;
+    -webkit-box-shadow: 0px 0px 4px 1px white;
+    -moz-box-shadow: 0px 0px 4px 1px white;
+}
+
 .exercise{
     border-radius: 15px;
     margin: 15px auto !important;

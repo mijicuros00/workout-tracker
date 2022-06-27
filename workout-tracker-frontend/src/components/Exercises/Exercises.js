@@ -5,6 +5,7 @@ import ExerciseService from "../../services/exercise-service";
 import Exercise from "./Exercise/Exercise";
 import classes from './Exercises.module.css'
 import MuscleGroupService from "../../services/muscle-group-service";
+import {useNavigate} from "react-router-dom";
 
 const Exercises = () =>{
 
@@ -16,6 +17,8 @@ const Exercises = () =>{
     const [searchInputValue, setSearchInputValue] = useState("");
     const [muscleGroup, setMuscleGroup] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+
+    let navigate = useNavigate();
 
     useEffect(() => {
         setIsLoading(true);
@@ -52,13 +55,18 @@ const Exercises = () =>{
         setMuscleGroup(e.target.value);
     }
 
+    const newExerciseButtonHandler = e =>{
+        e.preventDefault();
+        navigate("/exercises/form");
+    }
+
     const loaderCss = {
         position: "absolute",
         left: "40%",
         top: "50%"
     }
 
-    let exerciseList = exercises.map(exercise => <Exercise key={exercise.id} id={exercise.id} name={exercise.name} description={exercise.description} muscleGroups={exercise.muscleGroups} />)
+    let exerciseList = exercises.map(exercise => <Exercise key={exercise.id} id={exercise.id} name={exercise.name} description={exercise.description} muscleGroups={exercise.muscleGroups} isCustom={exercise.custom} />)
 
     return(
         <StandardLayout>
@@ -69,6 +77,7 @@ const Exercises = () =>{
                         <option  defaultChecked selected className={classes.option} disabled>Select muscle group</option>
                         {muscleGroups.map(muscleGroup => <option className={classes.option} value={muscleGroup.id}>{muscleGroup.name}</option> )}
                     </select>
+                    <button className={classes.newButton} onClick={newExerciseButtonHandler}>Create new exercise</button>
                     {isLoading ? <ClipLoader color={"white"} loading={isLoading} css={loaderCss} size={150} /> : exerciseList }
                 </main>
         </StandardLayout>

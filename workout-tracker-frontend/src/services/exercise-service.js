@@ -6,8 +6,8 @@ const getAll = (page, size, search, muscleGroup) =>{
         .catch(err => console.log(err));
 }
 
-const getOne = id =>{
-    return axios.get(`/exercises/${id}`)
+const getOne = (id, custom) =>{
+    return axios.get(`/exercises/${id}?custom=${custom}`)
         .then(response => response)
         .catch(err => console.log(err));
 }

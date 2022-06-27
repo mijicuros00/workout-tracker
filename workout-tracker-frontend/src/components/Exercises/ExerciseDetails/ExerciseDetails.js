@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import ExerciseService from "../../../services/exercise-service";
 import StandardLayout from "../../layout/StandardLayout";
 import classes from "../Exercises.module.css";
@@ -13,11 +13,14 @@ const ExerciseDetails = () =>{
     const [muscleGroups, setMuscleGroups] = useState([]);
 
     const { id } = useParams();
+    const {state} = useLocation();
+    const { isCustom } = state;
     let navigate = useNavigate();
 
     useEffect(() =>{
+        console.log(isCustom);
         setIsLoading(true);
-        ExerciseService.getOne(id)
+        ExerciseService.getOne(id, isCustom)
             .then(response => {
                 setExercise(response.data);
                 console.log(response.data);
@@ -26,7 +29,7 @@ const ExerciseDetails = () =>{
             }).catch(err => {
                 setIsLoading(false);
                 alert("Error while loading data.")
-        })
+        });
     }, []);
 
 
@@ -43,7 +46,9 @@ const ExerciseDetails = () =>{
                 <h1 className={classes.title}>Exercise details</h1>
                 <h2 className={classes.exerciseName}>{exercise.name}</h2>
                 <p>{exercise.description}</p>
+                <h1>{isCustom}</h1>
                 <p>This exercises activates these muscles: {groups.substr(0, groups.length-2)}</p>
+                <p>{isCustom.toString()}</p>
                 {image}
             </main>
         </StandardLayout>

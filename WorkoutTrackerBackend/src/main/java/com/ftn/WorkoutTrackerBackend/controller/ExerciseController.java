@@ -3,16 +3,18 @@ package com.ftn.WorkoutTrackerBackend.controller;
 import com.ftn.WorkoutTrackerBackend.entity.dto.ExerciseDTO;
 import com.ftn.WorkoutTrackerBackend.entity.dto.ExerciseRequestDTO;
 import com.ftn.WorkoutTrackerBackend.entity.mapper.ExerciseMapper;
-import com.ftn.WorkoutTrackerBackend.entity.model.Exercise;
-import com.ftn.WorkoutTrackerBackend.entity.model.MuscleGroup;
+import com.ftn.WorkoutTrackerBackend.entity.model.*;
+import com.ftn.WorkoutTrackerBackend.service.CustomExerciseService;
 import com.ftn.WorkoutTrackerBackend.service.ExerciseService;
 import com.ftn.WorkoutTrackerBackend.service.MuscleGroupService;
+import com.ftn.WorkoutTrackerBackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -29,10 +31,21 @@ public class ExerciseController {
     private ExerciseService exerciseService;
 
     @Autowired
+    private CustomExerciseService customExerciseService;
+
+    @Autowired
     private MuscleGroupService muscleGroupService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public ResponseEntity<List<ExerciseDTO>> getAll(Pageable pageable, @RequestParam(value = "search", defaultValue = "") String search, @RequestParam(required = false) Long muscleGroupId){
+
+        User user = userService.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        if(user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
         Page<Exercise> exercises = null;
         
@@ -47,6 +60,15 @@ public class ExerciseController {
             }
         }
 
+        List<ExerciseDTO> exerciseDTOList = ExerciseMapper.mapListToDTO(exercises.getContent());
+
+        if(user.getRole() == ERole.USER){
+            List<CustomExercise> customExercises = customExerciseService.findCustomExerciseByUser(user);
+            for(CustomExercise customExercise : customExercises){
+                exerciseDTOList.add(ExerciseMapper.mapCustomExerciseDTO(customExercise));
+            }
+        }
+
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.add("Access-Control-Expose-Headers", "X-Paging-Page,X-Paging-PageSize,X-Paging-PageCount,X-Paging-TotalRecordCount");
         responseHeaders.set("X-Paging-Page", String.valueOf(exercises.getNumber()));
@@ -54,20 +76,36 @@ public class ExerciseController {
         responseHeaders.set("X-Paging-PageCount", String.valueOf(exercises.getTotalPages()));
         responseHeaders.set("X-Paging-TotalRecordCount", String.valueOf(exercises.getTotalElements()));
 
-        return new ResponseEntity<>(ExerciseMapper.mapListToDTO(exercises.getContent()), responseHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(exerciseDTOList, responseHeaders, HttpStatus.OK);
     }
 
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ExerciseDTO> getOne(@PathVariable Long id){
-        Exercise exercise = exerciseService.findExerciseById(id);
+    public ResponseEntity<ExerciseDTO> getOne(@PathVariable Long id, @RequestParam boolean custom){
 
-        if(exercise == null){
+        CustomExercise customExercise = null;
+        Exercise exercise = null;
+        ExerciseDTO searchedExercise = null;
+
+        if(custom){
+            customExercise = customExerciseService.findCustomExerciseById(id);
+            if(customExercise != null) {
+                searchedExercise = ExerciseMapper.mapCustomExerciseDTO(customExercise);
+            }
+        }else{
+            exercise = exerciseService.findExerciseById(id);
+            if(exercise != null) {
+                searchedExercise = ExerciseMapper.mapDTO(exercise);
+            }
+        }
+
+        if(searchedExercise == null){
             System.out.println("no exercise with id = " + id);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(ExerciseMapper.mapDTO(exercise), HttpStatus.OK);
+
+        return new ResponseEntity<>(searchedExercise, HttpStatus.OK);
     }
 
     @PostMapping(consumes = { "multipart/form-data" })
@@ -78,15 +116,20 @@ public class ExerciseController {
                 .map(id -> muscleGroupService.findMuscleGroupById(id))
                 .collect(Collectors.toList());
 
-        Exercise exercise = ExerciseMapper.mapRequestDTOToModel(exerciseRequestDTO, muscleGroups);
-        Long id = exerciseService.save(exercise).getId();
+        User user = userService.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        if(user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
-        String location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(id)
-                .toUriString();
+        Long id;
+        if(user.getRole() == ERole.USER){
+            CustomExercise exercise = ExerciseMapper.mapRequestDTOToCustomExercise(exerciseRequestDTO, muscleGroups, user);
+            id = customExerciseService.save(exercise).getId();
+        }else{
+            Exercise exercise = ExerciseMapper.mapRequestDTOToModel(exerciseRequestDTO, muscleGroups);
+            id = exerciseService.save(exercise).getId();
+        }
 
-        return ResponseEntity.status(HttpStatus.CREATED).header(HttpHeaders.LOCATION, location).body(id);
+        return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 }
