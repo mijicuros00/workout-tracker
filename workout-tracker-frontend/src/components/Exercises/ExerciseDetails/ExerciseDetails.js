@@ -48,7 +48,6 @@ const ExerciseDetails = () =>{
                 <p>{exercise.description}</p>
                 <h1>{isCustom}</h1>
                 <p>This exercises activates these muscles: {groups.substr(0, groups.length-2)}</p>
-                <p>{isCustom.toString()}</p>
                 {image}
             </main>
         </StandardLayout>

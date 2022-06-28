@@ -74,7 +74,8 @@ const Exercises = () =>{
                     <h1 className={classes.title}>Exercises</h1>
                     <input type="text" placeholder="search exercises" value={searchInputValue} className={classes.search} onChange={searchChangeHandler}/>
                     <select placeholder="Select muscle group" className={classes.select} value={muscleGroup !== 0 ? muscleGroup : null} onChange={selectHandler}>
-                        <option  defaultChecked selected className={classes.option} disabled>Select muscle group</option>
+                        <option defaultChecked selected className={classes.option} disabled>Select muscle group</option>
+                        <option className={classes.option} value={0}>No muscle group</option>
                         {muscleGroups.map(muscleGroup => <option className={classes.option} value={muscleGroup.id}>{muscleGroup.name}</option> )}
                     </select>
                     <button className={classes.newButton} onClick={newExerciseButtonHandler}>Create new exercise</button>
