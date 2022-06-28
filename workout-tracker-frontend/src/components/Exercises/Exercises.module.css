@@ -103,7 +103,6 @@ input, select{
 
 input[type = "text"]{
     padding: 10px;
-    width: 100%;
 }
 
 .checkbox{
@@ -118,7 +117,6 @@ input[type = "text"]{
 
     input[type = "text"]{
         padding: 10px;
-        width: 100%;
     }
 
 }
