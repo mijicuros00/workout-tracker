@@ -12,12 +12,15 @@ const Exercise = props =>{
             <Col lg={4} md={3} sm={12} xs={12} className="my-auto">
                 <span className={classes.name}>{props.name}</span>
             </Col>
-            <Col lg={4} md={3} sm={12} xs={12} className="my-auto">
-                <span className={classes.description}>{props.description}</span>
-            </Col>
+            {!props.pick ? <Col lg={4} md={3} sm={12} xs={12} className="my-auto">
+                                <span className={classes.description}>{props.description}</span>
+                          </Col> : null}
             <Col lg={4} md={3} sm={12} xs={12} className="my-auto">
                 <span>{muscleGroups.substr(0, muscleGroups.length-2)}</span>
             </Col>
+            {props.pick ? <Col lg={4} md={3} sm={12} xs={12} className="my-auto">
+                            <button>Pick</button>
+                          </Col> : null}
         </Row>
     );
 }

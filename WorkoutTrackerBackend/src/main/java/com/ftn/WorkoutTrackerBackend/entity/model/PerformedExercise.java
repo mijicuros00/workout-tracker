@@ -17,7 +17,7 @@ public class PerformedExercise {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     List<WorkingSet> workingSets;
 
     @ManyToOne

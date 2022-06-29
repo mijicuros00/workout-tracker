@@ -1,89 +1,24 @@
-import StandardLayout from "../layout/StandardLayout";
+import classes from "./Exercises.module.css";
 import ClipLoader from "react-spinners/ClipLoader";
-import {useEffect, useState} from "react";
-import ExerciseService from "../../services/exercise-service";
 import Exercise from "./Exercise/Exercise";
-import classes from './Exercises.module.css'
-import MuscleGroupService from "../../services/muscle-group-service";
-import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
-const Exercises = () =>{
+const Exercises = props =>{
 
-    const [exercises, setExercises] = useState([]);
-    const [muscleGroups, setMuscleGroups] = useState([]);
-    const [page, setPage] = useState(0);
-    const [size, setSize] = useState(100);
-    const [totalPages, setTotalPages] = useState(0);
-    const [searchInputValue, setSearchInputValue] = useState("");
-    const [muscleGroup, setMuscleGroup] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
-
-    let navigate = useNavigate();
-
-    useEffect(() => {
-        setIsLoading(true);
-        MuscleGroupService.getAll()
-            .then(response => {
-                setMuscleGroups(response.data);
-                setIsLoading(false);
-            }).catch(() => {
-            alert("An error occurred while loading data!");
-            setIsLoading(false);
-        })
-    }, [])
-
-    useEffect(() =>{
-        setIsLoading(true);
-        ExerciseService.getAll(page, size, searchInputValue, muscleGroup)
-            .then(response => {
-                setExercises(response.data);
-                setTotalPages(parseInt(response.headers["x-paging-pagecount"]));
-                setIsLoading(false);
-            }).catch(() => {
-                alert("An error occurred while loading exercises!");
-                setIsLoading(false);
-        })
-    }, [page, size, searchInputValue, muscleGroup]);
-
-
-    const searchChangeHandler = e =>{
-        e.preventDefault();
-        setSearchInputValue(e.target.value);
-    }
-
-    const selectHandler = e =>{
-        setMuscleGroup(e.target.value);
-    }
-
-    const newExerciseButtonHandler = e =>{
-        e.preventDefault();
-        navigate("/exercises/form");
-    }
-
-    const loaderCss = {
-        position: "absolute",
-        left: "40%",
-        top: "50%"
-    }
-
-    let exerciseList = exercises.map(exercise => <Exercise key={exercise.id} id={exercise.id} name={exercise.name} description={exercise.description} muscleGroups={exercise.muscleGroups} isCustom={exercise.custom} />)
+    let exerciseList = props.exercises.map(exercise => <Exercise key={exercise.id} id={exercise.id} name={exercise.name} description={exercise.description} muscleGroups={exercise.muscleGroups} isCustom={exercise.custom} pick={false} />)
 
     return(
-        <StandardLayout>
-                <main className={classes.main} style={{minHeight: "90vh"}}>
-                    <h1 className={classes.title}>Exercises</h1>
-                    <input type="text" placeholder="search exercises" value={searchInputValue} className={classes.search} onChange={searchChangeHandler}/>
-                    <select placeholder="Select muscle group" className={classes.select} value={muscleGroup !== 0 ? muscleGroup : null} onChange={selectHandler}>
-                        <option defaultChecked selected className={classes.option} disabled>Select muscle group</option>
-                        <option className={classes.option} value={0}>No muscle group</option>
-                        {muscleGroups.map(muscleGroup => <option className={classes.option} value={muscleGroup.id}>{muscleGroup.name}</option> )}
-                    </select>
-                    <button className={classes.newButton} onClick={newExerciseButtonHandler}>Create new exercise</button>
-                    {isLoading ? <ClipLoader color={"white"} loading={isLoading} css={loaderCss} size={150} /> : exerciseList }
-                </main>
-        </StandardLayout>
+        <>
+            <input type="text" placeholder="search exercises" value={props.searchInputValue} className={classes.search} onChange={props.searchChangeHandler}/>
+            <select placeholder="Select muscle group" className={classes.select} value={props.muscleGroup !== 0 ? props.muscleGroup : null} onChange={props.selectHandler}>
+                <option defaultChecked selected className={classes.option} disabled>Select muscle group</option>
+                <option className={classes.option} value={0}>No muscle group</option>
+                {props.muscleGroups.map(muscleGroup => <option className={classes.option} value={muscleGroup.id}>{muscleGroup.name}</option> )}
+            </select>
+            <button className={classes.newButton} onClick={props.newExerciseButtonHandler}>Create new exercise</button>
+            {props.isLoading ? <ClipLoader color={"white"} loading={props.isLoading} css={props.loaderCss} size={150} /> : exerciseList }
+        </>
     );
-
 }
 
 export default Exercises;
