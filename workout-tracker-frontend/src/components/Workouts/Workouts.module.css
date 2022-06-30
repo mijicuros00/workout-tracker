@@ -7,44 +7,9 @@
     text-align: center;
 }
 
-.exerciseName{
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.search{
-    border-radius: 15px;
-    background-color: #3b3b3b;
-    border: 1px solid white;
-    padding: 10px;
-}
-
-.search:hover{
-    cursor: pointer;
-}
-
-.search:active{
-    box-shadow: 0px 0px 4px 1px rgba(256,256,256,0.7);
-    -webkit-box-shadow: 0px 0px 4px 1px rgba(256,256,256,0.7);
-    -moz-box-shadow: 0px 0px 4px 1px rgba(256,256,256,0.7);
-}
-
-.select{
-    background-color: #3b3b3b;
-    color: white;
-    border-radius: 15px;
-}
-
-.select:hover{
-    cursor: pointer;
-}
-
-.option{
-    color: white;
-}
-
 .newButton{
-    border-radius: 15px;
+    color: white;
+    border-radius: 7px;
     margin: 15px auto !important;
     padding: 10px;
     text-align: center;
@@ -52,7 +17,6 @@
     box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
     -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
     -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
-    color: white;
 }
 
 .newButton:hover{
@@ -61,56 +25,53 @@
     -moz-box-shadow: 0px 0px 4px 1px white;
 }
 
-.exercise{
-    border-radius: 15px;
-    margin: 15px auto !important;
-    padding: 10px;
+.performedExercise{
     text-align: center;
+    padding: 10px;
+    background-color: #3b3b3b;
     box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
     -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
     -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
-    color: #000000;
+    border-radius: 15px;
+    margin-bottom: 20px;
 }
 
-.exercise:hover{
+.addSetButton{
+    border-radius: 7px;
+    background-color: #3b3b3b;
+    color: white;
+    box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+}
+
+.addSetButton:hover{
     box-shadow: 0px 0px 4px 1px white;
     -webkit-box-shadow: 0px 0px 4px 1px white;
     -moz-box-shadow: 0px 0px 4px 1px white;
     cursor: pointer;
 }
 
-.name{
-    font-weight: bold;
+.addSetForm{
+    text-align: center;
 }
 
-.description{
-    font-style: italic;
-}
-
-.form{
-    background-color: #191919;
-    padding: 30px 30px 30px 30px;
-    width: 90%;
-    margin: 15vh auto auto;
-    border-radius: 10px;
-}
-
-input, select{
-    display: block;
-    margin: 20px auto;
-    color: black;
-}
-
-input[type = "text"]{
+input[type = "number"]{
+    margin-bottom: 10px;
+    margin-top: 0;
+    border-radius: 15px;
+    background-color: #3b3b3b;
+    border: 1px solid white;
     padding: 10px;
 }
 
-.checkbox{
-    display: inline-block;
-    margin: 5px 15px;
+input[type = "number"]:active{
+    box-shadow: 0px 0px 4px 1px rgba(256,256,256,0.7);
+    -webkit-box-shadow: 0px 0px 4px 1px rgba(256,256,256,0.7);
+    -moz-box-shadow: 0px 0px 4px 1px rgba(256,256,256,0.7);
 }
 
-.pickButton{
+.submitSetButton{
     border-radius: 15px;
     background-color: #3b3b3b;
     color: white;
@@ -119,20 +80,9 @@ input[type = "text"]{
     -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
 }
 
-.pickButton:hover{
+.submitSetButton:hover{
     box-shadow: 0px 0px 4px 1px white;
     -webkit-box-shadow: 0px 0px 4px 1px white;
     -moz-box-shadow: 0px 0px 4px 1px white;
     cursor: pointer;
-}
-
-@media (min-width: 1000px) {
-    .form{
-        width: 50%;
-    }
-
-    input[type = "text"]{
-        padding: 10px;
-    }
-
 }

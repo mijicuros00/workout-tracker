@@ -5,7 +5,7 @@ import {useEffect} from "react";
 
 const Exercises = props =>{
 
-    let exerciseList = props.exercises.map(exercise => <Exercise key={exercise.id} id={exercise.id} name={exercise.name} description={exercise.description} muscleGroups={exercise.muscleGroups} isCustom={exercise.custom} pick={false} />)
+    let exerciseList = props.exercises.map(exercise => <Exercise key={exercise.id} id={exercise.id} name={exercise.name} description={exercise.description} muscleGroups={exercise.muscleGroups} isCustom={exercise.custom} pick={props.pick} pickButtonHandler={props.pickButtonHandler} image={props.image} />)
 
     return(
         <>
@@ -15,7 +15,7 @@ const Exercises = props =>{
                 <option className={classes.option} value={0}>No muscle group</option>
                 {props.muscleGroups.map(muscleGroup => <option className={classes.option} value={muscleGroup.id}>{muscleGroup.name}</option> )}
             </select>
-            <button className={classes.newButton} onClick={props.newExerciseButtonHandler}>Create new exercise</button>
+            {!props.pick ? <button className={classes.newButton} onClick={props.newExerciseButtonHandler}>Create new exercise</button> : null}
             {props.isLoading ? <ClipLoader color={"white"} loading={props.isLoading} css={props.loaderCss} size={150} /> : exerciseList }
         </>
     );

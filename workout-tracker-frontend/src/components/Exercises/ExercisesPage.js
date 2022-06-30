@@ -73,7 +73,7 @@ const ExercisesPage = () =>{
                 <main className={classes.main} style={{minHeight: "90vh"}}>
                     <h1 className={classes.title}>Exercises</h1>
                     <Exercises searchInputValue={searchInputValue} searchChangeHandler={searchChangeHandler}
-                               muscleGroup={muscleGroup} selectHandler={selectHandler}
+                               muscleGroup={muscleGroup} selectHandler={selectHandler} pick={false}
                                newExerciseButtonHandler={newExerciseButtonHandler} isLoading={isLoading}
                                loaderCss={loaderCss} exercises={exercises} muscleGroups={muscleGroups}/>
                 </main>

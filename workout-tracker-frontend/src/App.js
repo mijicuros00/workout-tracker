@@ -8,6 +8,7 @@ import ExercisesPage from "./components/Exercises/ExercisesPage";
 import ExerciseForm from "./components/Exercises/ExerciseForm/ExerciseForm";
 import ExerciseDetails from "./components/Exercises/ExerciseDetails/ExerciseDetails";
 import Workouts from "./components/Workouts/Workouts";
+import NewWorkout from "./components/Workouts/NewWorkout/NewWorkout";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/exercises/form" element={<ExerciseForm/>} exact/>
             <Route path="/exercises" element={<ExercisesPage/>} exact/>
             <Route path="/workouts" element={<Workouts/>} exact/>
+            <Route path="/workouts/new" element={<NewWorkout/>} exact/>
         </Routes>
     </BrowserRouter>
   );

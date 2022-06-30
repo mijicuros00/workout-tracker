@@ -7,8 +7,21 @@ const Exercise = props =>{
     let navigate = useNavigate();
     let muscleGroups = props.muscleGroups.map(group => group.name + ", ").toString();
 
+    const clickHandler = () =>{
+        navigate(`/exercises/${props.id}`, {state : {isCustom : props.isCustom}});
+    }
+
+    let exercise = {
+        id: props.id,
+        name: props.name,
+        description: props.description,
+        image: props.image,
+        muscleGroups: props.muscleGroups,
+        custom: props.isCustom
+    }
+
     return (
-        <Row className={classes.exercise} onClick={() => navigate(`/exercises/${props.id}`, {state : {isCustom : props.isCustom}})}>
+        <Row className={classes.exercise} onClick={props.pick ? null : clickHandler}>
             <Col lg={4} md={3} sm={12} xs={12} className="my-auto">
                 <span className={classes.name}>{props.name}</span>
             </Col>
@@ -19,7 +32,7 @@ const Exercise = props =>{
                 <span>{muscleGroups.substr(0, muscleGroups.length-2)}</span>
             </Col>
             {props.pick ? <Col lg={4} md={3} sm={12} xs={12} className="my-auto">
-                            <button>Pick</button>
+                            <button onClick={() => props.pickButtonHandler(exercise)} className={classes.pickButton}>Pick</button>
                           </Col> : null}
         </Row>
     );
