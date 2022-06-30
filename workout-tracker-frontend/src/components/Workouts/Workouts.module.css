@@ -37,6 +37,7 @@
 }
 
 .addSetButton{
+    margin-bottom: 10px;
     border-radius: 7px;
     background-color: #3b3b3b;
     color: white;

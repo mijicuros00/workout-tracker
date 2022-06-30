@@ -87,13 +87,15 @@ const NewWorkout = () =>{
     }
 
     const addSetHandler = (set) =>{
-        alert(set.exerciseId);
-        // performedExercises.forEach(performedExercise => {
-        //     console.log(performedExercise.exercise.id + " " + set.exerciseId)
-        //     if(performedExercise.exercise.id === set.exerciseId){
-        //         performedExercise.workingSets.push({weight: set.weight, reps: set.reps});
-        //     }
-        // })
+        performedExercises.forEach(performedExercise => {
+            if(performedExercise.exercise.id === set.exerciseId){
+                performedExercise.workingSets.push({weight: set.weight, reps: set.reps});
+            }
+        })
+    }
+
+    const finishWorkoutHandler = () =>{
+        console.log(performedExercises);
     }
 
     const customStyles = {
@@ -127,6 +129,7 @@ const NewWorkout = () =>{
                                pickButtonHandler={pickButtonHandler}/>
                 </Modal>
                 <PerformedExercises performedExercises={performedExercises} addSetHandler={addSetHandler} />
+                {performedExercises.length < 1 ? null : <button onClick={finishWorkoutHandler} className={classes.newButton}>Finish workout</button>}
             </main>
         </StandardLayout>
     )
