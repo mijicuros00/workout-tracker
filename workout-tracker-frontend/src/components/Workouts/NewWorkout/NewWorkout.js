@@ -7,6 +7,9 @@ import {useNavigate} from "react-router-dom";
 import MuscleGroupService from "../../../services/muscle-group-service";
 import ExerciseService from "../../../services/exercise-service";
 import PerformedExercises from "../PerformedExercises/PerformedExercises";
+import WorkoutService from "../../../services/workout-service";
+
+const kgLbsRatio = 2.2046;
 
 const NewWorkout = () =>{
 
@@ -87,6 +90,12 @@ const NewWorkout = () =>{
     }
 
     const addSetHandler = (set) =>{
+
+        if(set.weight < 0 || set.reps<= 0){
+            alert("Incorrect entry for weight or reps!");
+            return;
+        }
+
         performedExercises.forEach(performedExercise => {
             if(performedExercise.exercise.id === set.exerciseId){
                 performedExercise.workingSets.push({weight: set.weight, reps: set.reps});
@@ -95,7 +104,17 @@ const NewWorkout = () =>{
     }
 
     const finishWorkoutHandler = () =>{
-        console.log(performedExercises);
+
+        if(localStorage.getItem("units") === "imperial"){
+            performedExercises.forEach(performedExercise => {
+                performedExercise.workingSets.map(workingSet => workingSet.weight = (workingSet.weight / kgLbsRatio).toFixed(2));
+            })
+        }
+
+        WorkoutService.createWorkout(performedExercises)
+            .then(response =>{
+                navigate(`/workouts/${response}`);
+            }).catch(err => alert("There was an error while creating this workout!"));
     }
 
     const customStyles = {
