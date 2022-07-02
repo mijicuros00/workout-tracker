@@ -13,7 +13,7 @@ const PerformedExercise = props =>{
     return(
         <div className={classes.performedExercise}>
             <h3>{props.performedExercise.exercise.name}</h3>
-            <button onClick={openModal} className={classes.addSetButton}>Add a set</button>
+            {props.adding ? <button onClick={openModal} className={classes.addSetButton}>Add a set</button> : null}
             {props.performedExercise.workingSets.map(set => <WorkingSet set={set} />)}
 
         </div>

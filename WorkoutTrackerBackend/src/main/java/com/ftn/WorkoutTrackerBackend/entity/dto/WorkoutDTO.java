@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.OneToMany;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -12,4 +13,5 @@ import java.util.List;
 public class WorkoutDTO {
     private Long id;
     List<PerformedExerciseDTO> performedExercises;
+    private Date dateOfWorkout;
 }

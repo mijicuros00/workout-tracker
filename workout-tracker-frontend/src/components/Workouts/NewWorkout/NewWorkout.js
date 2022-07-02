@@ -147,7 +147,7 @@ const NewWorkout = () =>{
                                loaderCss={loaderCss} exercises={exercises} muscleGroups={muscleGroups}
                                pickButtonHandler={pickButtonHandler}/>
                 </Modal>
-                <PerformedExercises performedExercises={performedExercises} addSetHandler={addSetHandler} />
+                <PerformedExercises performedExercises={performedExercises} addSetHandler={addSetHandler} adding />
                 {performedExercises.length < 1 ? null : <button onClick={finishWorkoutHandler} className={classes.newButton}>Finish workout</button>}
             </main>
         </StandardLayout>

@@ -3,6 +3,7 @@ package com.ftn.WorkoutTrackerBackend.entity.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -22,4 +23,6 @@ public class Workout {
 
     @ManyToOne
     private User user;
+
+    private Date dateOfWorkout;
 }

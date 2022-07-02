@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -70,6 +71,7 @@ public class WorkoutController {
         }
 
         Workout workout = WorkoutMapper.mapModel(workoutDTO);
+        workout.setDateOfWorkout(new Date());
         workout.setUser(user);
 
         Workout createdWorkout = workoutService.save(workout);

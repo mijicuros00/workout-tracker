@@ -1,8 +1,19 @@
 import classes from './Workouts.module.css';
 import StandardLayout from "../layout/StandardLayout";
 import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import WorkoutService from "../../services/workout-service";
+import Workout from "./Workout/Workout";
 
 const Workouts = () =>{
+
+    const [workouts, setWorkouts] = useState([]);
+
+    useEffect(() =>{
+        WorkoutService.getAll()
+            .then(response => setWorkouts(response))
+            .catch(err => alert("There was an error while loading your workouts"))
+    }, [])
 
     let navigate = useNavigate();
 
@@ -16,6 +27,7 @@ const Workouts = () =>{
             <main className={classes.main} style={{minHeight: "90vh"}}>
                 <h1 className={classes.title}>Your previous workouts</h1>
                 <button className={classes.newButton} onClick={newExerciseButtonHandler}>Start a new workout</button>
+                {workouts.map(workout => <Workout workout={workout} />)}
             </main>
         </StandardLayout>
     );

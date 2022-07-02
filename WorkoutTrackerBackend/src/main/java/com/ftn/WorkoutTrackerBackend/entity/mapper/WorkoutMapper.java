@@ -3,7 +3,6 @@ package com.ftn.WorkoutTrackerBackend.entity.mapper;
 import com.ftn.WorkoutTrackerBackend.entity.dto.WorkoutDTO;
 import com.ftn.WorkoutTrackerBackend.entity.model.Workout;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +12,7 @@ public class WorkoutMapper {
         return WorkoutDTO.builder()
                 .id(workout.getId())
                 .performedExercises(PerformedExerciseMapper.mapListToDTO(workout.getPerformedExercises()))
+                .dateOfWorkout(workout.getDateOfWorkout())
                 .build();
     }
 
@@ -20,6 +20,7 @@ public class WorkoutMapper {
         return Workout.builder()
                 .id(workoutDTO.getId())
                 .performedExercises(PerformedExerciseMapper.mapDTOListToModel(workoutDTO.getPerformedExercises()))
+                .dateOfWorkout(workoutDTO.getDateOfWorkout())
                 .build();
     }
 
