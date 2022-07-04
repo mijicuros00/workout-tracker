@@ -3,6 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import {NavLink, Link} from "react-router-dom";
 import classes from './layout.module.css';
+import {NavDropdown} from "react-bootstrap";
 
 const Header = () =>{
     return(
@@ -16,6 +17,7 @@ const Header = () =>{
                     <NavLink to="/workouts" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>Workouts</NavLink>
                     <NavLink to="/exercises" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>Exercises</NavLink>
                     <NavLink to="/statistics" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>My statistics</NavLink>
+                    <NavLink to="/calculators" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>Calculators</NavLink>
                 </Nav>
             </Navbar.Collapse>
 
