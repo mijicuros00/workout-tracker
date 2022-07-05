@@ -3,6 +3,7 @@ import classes from "../Exercises/Exercises.module.css";
 import Exercises from "../Exercises/Exercises";
 import {Col, Row} from "react-bootstrap";
 import OneRepMaxCalculator from "./OneRepMaxCalculator";
+import CalorieCalculator from "./CalorieCalculator";
 
 const CalculatorsPage = () =>{
 
@@ -15,7 +16,7 @@ const CalculatorsPage = () =>{
                         <OneRepMaxCalculator />
                     </Col>
                     <Col lg={6} md={6} sm={12} xs={12}>
-                        <OneRepMaxCalculator />
+                        <CalorieCalculator />
                     </Col>
                 </Row>
             </main>
