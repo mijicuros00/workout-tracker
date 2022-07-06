@@ -1,0 +1,71 @@
+.title{
+    text-align: center;
+}
+
+.bodyMeasure{
+    border-radius: 15px;
+    margin: 15px auto !important;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    color: #000000;
+}
+
+.bodyMeasure:hover{
+    box-shadow: 0px 0px 4px 1px white;
+    -webkit-box-shadow: 0px 0px 4px 1px white;
+    -moz-box-shadow: 0px 0px 4px 1px white;
+    cursor: pointer;
+}
+.main{
+    width: 70vw;
+    margin: 15vh auto 20px;
+}
+
+.newButton{
+    color: white;
+    border-radius: 7px;
+    margin: 15px auto !important;
+    padding: 10px;
+    text-align: center;
+    background-color: #3b3b3b;
+    box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+}
+
+.newButton:hover{
+    box-shadow: 0px 0px 4px 1px white;
+    -webkit-box-shadow: 0px 0px 4px 1px white;
+    -moz-box-shadow: 0px 0px 4px 1px white;
+}
+
+.form{
+    text-align: center;
+    border-radius: 15px;
+    margin: 15px auto !important;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    color: #000000;
+}
+
+.submitButton{
+    border-radius: 15px;
+    background-color: #3b3b3b;
+    color: white;
+    box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+}
+
+.submitButton:hover{
+    box-shadow: 0px 0px 4px 1px white;
+    -webkit-box-shadow: 0px 0px 4px 1px white;
+    -moz-box-shadow: 0px 0px 4px 1px white;
+    cursor: pointer
+}

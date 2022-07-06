@@ -11,6 +11,8 @@ import Workouts from "./components/Workouts/Workouts";
 import NewWorkout from "./components/Workouts/NewWorkout/NewWorkout";
 import WorkoutDetails from "./components/Workouts/WorkoutDetails/WorkoutDetails";
 import CalculatorsPage from "./components/Calculators/CalculatorsPage";
+import StatisticsPage from "./components/Statistics/StatisticsPage";
+import BodyMeasureGraph from "./components/Statistics/BodyMeasureGraph/BodyMeasureGraph";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
             <Route path="/workouts/new" element={<NewWorkout/>} exact/>
             <Route path="/workouts/:id" element={<WorkoutDetails />} exact/>
             <Route path="/calculators" element={<CalculatorsPage />} exact/>
+            <Route path="/statistics" element={<StatisticsPage />} exact/>
+            <Route path="/statistics/:id" element={<BodyMeasureGraph />} exact/>
         </Routes>
     </BrowserRouter>
   );
