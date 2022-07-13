@@ -39,7 +39,7 @@ const ExerciseDetails = () =>{
     if(exercise.image !== "" && exercise.image !== null){
         image = <img style={{maxWidth: "100%", objectFit: "cover"}} src={"data:image/png;base64, " + exercise.image} alt="Exercise picture"/>;
     }
-
+//TODO: centriraj sliku
     return(
         <StandardLayout>
             <main className={classes.main} style={{minHeight: "90vh"}}>

@@ -62,3 +62,15 @@
 .active:hover{
     color: darkslateblue;
 }
+
+.logout{
+    background-color: white;
+    border-radius: 8px;
+    color: black;
+    margin-right: 25px;
+}
+
+.logout:hover{
+    background-color: black;
+    color: white;
+}

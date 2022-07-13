@@ -18,6 +18,7 @@ const Header = () =>{
                     <NavLink to="/exercises" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>Exercises</NavLink>
                     <NavLink to="/statistics" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>My statistics</NavLink>
                     <NavLink to="/calculators" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>Calculators</NavLink>
+                    <button className={classes.logout}>Logout</button>
                 </Nav>
             </Navbar.Collapse>
 
