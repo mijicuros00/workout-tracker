@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,8 +64,18 @@ public class ExerciseController {
 
         List<ExerciseDTO> exerciseDTOList = ExerciseMapper.mapListToDTO(exercises.getContent());
 
+        List<CustomExercise> customExercises = new ArrayList<>();
         if(user.getRole() == ERole.USER){
-            List<CustomExercise> customExercises = customExerciseService.findCustomExerciseByUser(user);
+
+            if(muscleGroupId == 0){
+                customExercises = customExerciseService.findCustomExerciseByUserAndNameIsContaining(user, search);
+            }else{
+                MuscleGroup muscleGroup = muscleGroupService.findMuscleGroupById(muscleGroupId);
+
+                if(muscleGroup != null){
+                    customExercises = customExerciseService.findCustomExerciseByUserAndNameIsContainingAndMuscleGroupsContaining(user, search,  muscleGroup);
+                }
+            }
             for(CustomExercise customExercise : customExercises){
                 exerciseDTOList.add(ExerciseMapper.mapCustomExerciseDTO(customExercise));
             }
