@@ -1,11 +1,19 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import {NavLink, Link} from "react-router-dom";
+import {NavLink, Link, useNavigate} from "react-router-dom";
 import classes from './layout.module.css';
 import {NavDropdown} from "react-bootstrap";
 
 const Header = () =>{
+
+    let navigate = useNavigate();
+
+    const logoutHandler = () =>{
+        localStorage.removeItem("workoutTrackerAccessToken");
+        navigate("/login");
+    }
+
     return(
         <Navbar collapseOnSelect expand="lg" className={classes.nav} variant="dark">
             <Navbar.Brand className={classes.logoText}><Link to="/main">Workout tracker</Link></Navbar.Brand>
@@ -18,7 +26,7 @@ const Header = () =>{
                     <NavLink to="/exercises" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>Exercises</NavLink>
                     <NavLink to="/statistics" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>My statistics</NavLink>
                     <NavLink to="/calculators" className={({isActive}) => (isActive ? classes.active : classes.navLink)}>Calculators</NavLink>
-                    <button className={classes.logout}>Logout</button>
+                    <button onClick={logoutHandler} className={classes.logout}>Logout</button>
                 </Nav>
             </Navbar.Collapse>
 

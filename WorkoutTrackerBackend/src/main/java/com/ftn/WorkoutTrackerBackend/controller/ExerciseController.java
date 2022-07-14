@@ -41,7 +41,6 @@ public class ExerciseController {
     private UserService userService;
 
     @GetMapping
-    //TODO: popravi custom exercise da vraca samo ako spada u search ili body part
     public ResponseEntity<List<ExerciseDTO>> getAll(Pageable pageable, @RequestParam(value = "search", defaultValue = "") String search, @RequestParam(required = false) Long muscleGroupId){
 
         User user = userService.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());

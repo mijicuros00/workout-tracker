@@ -7,6 +7,7 @@ const Exercises = props =>{
 
     let exerciseList = props.exercises.map(exercise => <Exercise key={exercise.id} id={exercise.id} name={exercise.name} description={exercise.description} muscleGroups={exercise.muscleGroups} isCustom={exercise.custom} pick={props.pick} pickButtonHandler={props.pickButtonHandler} image={props.image} />)
 
+    //TODO: Fix modal design when modal is too big
     return(
         <>
             <input type="text" placeholder="search exercises" value={props.searchInputValue} className={classes.search} onChange={props.searchChangeHandler}/>
