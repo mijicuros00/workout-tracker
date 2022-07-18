@@ -1,6 +1,5 @@
 import StandardLayout from "../../layout/StandardLayout";
 import classes from "../Workouts.module.css";
-import Workout from "../Workout/Workout";
 import {useEffect, useState} from "react";
 import WorkoutService from "../../../services/workout-service";
 import {useParams} from "react-router-dom";
@@ -38,7 +37,7 @@ const WorkoutDetails = () =>{
             <main className={classes.main} style={{minHeight: "90vh"}}>
                 <h1 className={classes.title}>Details of your workout</h1>
                 <h3 className={classes.date}>Date of workout: {`${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`}</h3>
-                <PerformedExercises performedExercises={performedExercises} />
+                <PerformedExercises details performedExercises={performedExercises} />
             </main>
         </StandardLayout>
     );

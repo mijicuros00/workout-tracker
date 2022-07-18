@@ -50,7 +50,7 @@ const PerformedExercises = props =>{
 
     let performedExercises = props.performedExercises.map(performedExercise => {
         return(
-            <PerformedExercise performedExercise={performedExercise} setExerciseId={setExerciseId} key={performedExercise.exercise.id} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} addSetHandler={props.addSetHandler} adding={props.adding} />
+            <PerformedExercise details={props.details} performedExercise={performedExercise} setExerciseId={setExerciseId} key={performedExercise.exercise.id} modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen} addSetHandler={props.addSetHandler} adding={props.adding} />
         )
     });
 
