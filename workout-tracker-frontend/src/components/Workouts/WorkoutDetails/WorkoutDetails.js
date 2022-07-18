@@ -2,7 +2,7 @@ import StandardLayout from "../../layout/StandardLayout";
 import classes from "../Workouts.module.css";
 import {useEffect, useState} from "react";
 import WorkoutService from "../../../services/workout-service";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import PerformedExercises from "../PerformedExercises/PerformedExercises";
 
 const kgLbsRatio = 2.2046;
@@ -13,6 +13,7 @@ const WorkoutDetails = () =>{
     const [dateOfWorkout, setDateOfWorkout] = useState();
 
     const { id } = useParams();
+    let navigate = useNavigate();
     let date = new Date(dateOfWorkout);
 
     useEffect(() =>{
@@ -29,7 +30,15 @@ const WorkoutDetails = () =>{
             })
             .catch(err => alert("There was an error while loading details of this workout!"));
 
-    }, [])
+    }, []);
+
+    const deleteHandler = () =>{
+        WorkoutService.deleteWorkout(id)
+            .then(response =>{
+                alert("Workout deleted successfully!");
+                navigate("/workouts");
+            }).catch(() => alert("There was an error while trying to delete this workout!"))
+    }
 
 
     return(
@@ -38,6 +47,7 @@ const WorkoutDetails = () =>{
                 <h1 className={classes.title}>Details of your workout</h1>
                 <h3 className={classes.date}>Date of workout: {`${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`}</h3>
                 <PerformedExercises details performedExercises={performedExercises} />
+                <button onClick={deleteHandler} className={classes.deleteButton}>Delete this workout</button>
             </main>
         </StandardLayout>
     );

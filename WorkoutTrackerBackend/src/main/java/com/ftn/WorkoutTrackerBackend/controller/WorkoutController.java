@@ -79,4 +79,21 @@ public class WorkoutController {
         return new ResponseEntity<>(createdWorkout.getId(), HttpStatus.CREATED);
 
     }
+
+    @Transactional
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity deleteWorkout(@PathVariable Long id){
+
+        User user = userService.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        if(user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        try{
+            workoutService.deleteWorkoutById(id);
+            return new ResponseEntity(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
 }

@@ -21,10 +21,17 @@ const createWorkout = performedExercises =>{
         .catch(err => console.log(err));
 }
 
+const deleteWorkout = id =>{
+    return axios.delete(`/workouts/${id}`)
+        .then(response => response.data)
+        .catch(err => console.log(err));
+}
+
 const WorkoutService = {
     createWorkout,
     getAll,
-    getOne
+    getOne,
+    deleteWorkout
 }
 
 export default WorkoutService

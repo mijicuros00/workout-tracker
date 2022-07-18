@@ -29,4 +29,9 @@ public class WorkoutServiceimplementation implements WorkoutService {
     public Workout save(Workout workout) {
         return workoutRepository.save(workout);
     }
+
+    @Override
+    public Workout deleteWorkoutById(Long id) {
+        return workoutRepository.deleteWorkoutById(id);
+    }
 }

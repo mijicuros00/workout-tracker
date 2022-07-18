@@ -143,4 +143,5 @@ public class ExerciseController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
+
 }
