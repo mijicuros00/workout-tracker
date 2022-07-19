@@ -19,6 +19,7 @@ const NewWorkout = () =>{
     const [searchInputValue, setSearchInputValue] = useState("");
     const [muscleGroup, setMuscleGroup] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const [dateOfWorkout, setDateOfWorkout] = useState(new Date().toISOString().substring(0,10));
     const [performedExercises, setPerformedExercises] = useState([]);
 
     let navigate = useNavigate();
@@ -103,6 +104,10 @@ const NewWorkout = () =>{
         })
     }
 
+    const dateChangeHandler = e =>{
+        setDateOfWorkout(e.target.value)
+    }
+
     const finishWorkoutHandler = () =>{
 
         if(localStorage.getItem("units") === "imperial"){
@@ -111,7 +116,7 @@ const NewWorkout = () =>{
             })
         }
 
-        WorkoutService.createWorkout(performedExercises)
+        WorkoutService.createWorkout(performedExercises, dateOfWorkout)
             .then(response =>{
                 navigate(`/workouts/${response}`);
             }).catch(err => alert("There was an error while creating this workout!"));
@@ -139,6 +144,7 @@ const NewWorkout = () =>{
         <StandardLayout>
             <main className={classes.main} style={{minHeight: "90vh"}}>
                 <h1 className={classes.title}>Create a new workout</h1>
+                <input type="date" value={dateOfWorkout} onChange={dateChangeHandler}/>
                 <button className={classes.newButton} onClick={openModal}>Add exercise</button>
                 <Modal style={customStyles} isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
                     <Exercises searchInputValue={searchInputValue} searchChangeHandler={searchChangeHandler}

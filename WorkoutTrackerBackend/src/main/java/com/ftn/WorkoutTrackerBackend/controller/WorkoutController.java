@@ -72,7 +72,7 @@ public class WorkoutController {
         }
 
         Workout workout = WorkoutMapper.mapModel(workoutDTO);
-        workout.setDateOfWorkout(new Date());
+//        workout.setDateOfWorkout(new Date());
         workout.setUser(user);
 
         Workout createdWorkout = workoutService.save(workout);

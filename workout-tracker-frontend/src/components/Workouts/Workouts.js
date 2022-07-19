@@ -25,7 +25,7 @@ const Workouts = () =>{
     return(
         <StandardLayout>
             <main className={classes.main} style={{minHeight: "90vh"}}>
-                <h1 className={classes.title}>Your previous workouts</h1>
+                <h1 className={classes.title}>Your workouts</h1>
                 <button className={classes.newButton} onClick={newExerciseButtonHandler}>Start a new workout</button>
                 {workouts.map(workout => <Workout workout={workout} />)}
             </main>

@@ -140,3 +140,9 @@ input[type = "number"]:active{
     color: white;
     cursor: pointer;
 }
+
+.datePicker{
+    padding: 5px;
+    background-color: #3b3b3b;
+    color: white;
+}

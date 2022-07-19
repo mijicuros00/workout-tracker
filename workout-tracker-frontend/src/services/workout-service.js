@@ -12,9 +12,10 @@ const getOne = id =>{
         .catch(err => console.log(err));
 }
 
-const createWorkout = performedExercises =>{
+const createWorkout = (performedExercises, dateOfWorkout) =>{
     let workout = {
-        "performedExercises": performedExercises
+        performedExercises,
+        dateOfWorkout
     }
     return axios.post('workouts', workout)
         .then(response => response.data)
