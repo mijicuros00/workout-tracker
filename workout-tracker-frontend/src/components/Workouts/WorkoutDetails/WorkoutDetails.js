@@ -28,7 +28,7 @@ const WorkoutDetails = () =>{
                 }
                 setPerformedExercises(performedExercisesResponse);
             })
-            .catch(err => alert("There was an error while loading details of this workout!"));
+            .catch(() => alert("There was an error while loading details of this workout!"));
 
     }, []);
 
@@ -40,13 +40,24 @@ const WorkoutDetails = () =>{
             }).catch(() => alert("There was an error while trying to delete this workout!"))
     }
 
+    const removeExerciseHandler = (performedExerciseId) =>{
+
+        let filteredExercises = performedExercises.filter(performedExercise => performedExercise.id !== performedExerciseId);
+
+        WorkoutService.updateWorkout(id, filteredExercises, dateOfWorkout)
+            .then(response =>{
+                setDateOfWorkout(response.dateOfWorkout);
+                setPerformedExercises(response.performedExercises);
+            }).catch(() => alert("There was an error while deleting chosen exercise!"))
+    }
+
 
     return(
         <StandardLayout>
             <main className={classes.main} style={{minHeight: "90vh"}}>
                 <h1 className={classes.title}>Details of your workout</h1>
                 <h3 className={classes.date}>Date of workout: {`${date.getDate()}.${date.getMonth()+1}.${date.getFullYear()}`}</h3>
-                <PerformedExercises details performedExercises={performedExercises} />
+                <PerformedExercises details performedExercises={performedExercises} removeExerciseHandler={removeExerciseHandler} />
                 <button onClick={deleteHandler} className={classes.deleteButton}>Delete this workout</button>
             </main>
         </StandardLayout>

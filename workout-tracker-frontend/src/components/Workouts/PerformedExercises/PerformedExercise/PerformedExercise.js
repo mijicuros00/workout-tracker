@@ -26,6 +26,7 @@ const PerformedExercise = props =>{
 
     return(
         <div className={classes.performedExercise}>
+            {props.details ? <p className={classes.removeExercise} onClick={() => props.removeExerciseHandler(props.performedExercise.id)} >X</p> : null}
             <h3 style={titleStyle} onClick={props.details ? openExerciseDetails : null}>{props.performedExercise.exercise.name}</h3>
             {props.adding ? <button onClick={openModal} className={classes.addSetButton}>Add a set</button> : null}
             {props.performedExercise.workingSets.map(set => <WorkingSet set={set} />)}

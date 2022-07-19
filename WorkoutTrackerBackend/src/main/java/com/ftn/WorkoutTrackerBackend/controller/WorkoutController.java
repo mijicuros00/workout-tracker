@@ -1,6 +1,7 @@
 package com.ftn.WorkoutTrackerBackend.controller;
 
 import com.ftn.WorkoutTrackerBackend.entity.dto.WorkoutDTO;
+import com.ftn.WorkoutTrackerBackend.entity.mapper.PerformedExerciseMapper;
 import com.ftn.WorkoutTrackerBackend.entity.mapper.WorkoutMapper;
 import com.ftn.WorkoutTrackerBackend.entity.model.User;
 import com.ftn.WorkoutTrackerBackend.entity.model.Workout;
@@ -77,6 +78,33 @@ public class WorkoutController {
         Workout createdWorkout = workoutService.save(workout);
 
         return new ResponseEntity<>(createdWorkout.getId(), HttpStatus.CREATED);
+
+    }
+
+    @PutMapping(value = "/{id}")
+    @Transactional
+    public ResponseEntity<WorkoutDTO> updateWorkout(@PathVariable Long id, @RequestBody WorkoutDTO workoutDTO){
+        User user = userService.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        if(user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        Workout workout = workoutService.findWorkoutById(id);
+
+        if(workout == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        if(!workout.getUser().equals(user)){
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
+        workout.setDateOfWorkout(workoutDTO.getDateOfWorkout());
+        workout.setPerformedExercises(PerformedExerciseMapper.mapDTOListToModel(workoutDTO.getPerformedExercises()));
+
+        workoutService.save(workout);
+
+        return new ResponseEntity<>(WorkoutMapper.mapDTO(workout), HttpStatus.OK);
 
     }
 

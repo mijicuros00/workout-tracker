@@ -34,6 +34,7 @@
     -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
     border-radius: 15px;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .addSetButton{
@@ -126,4 +127,16 @@ input[type = "number"]:active{
     box-shadow: 0px 0px 4px 1px white;
     -webkit-box-shadow: 0px 0px 4px 1px white;
     -moz-box-shadow: 0px 0px 4px 1px white;
+}
+
+.removeExercise{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    color: darkgray;
+}
+
+.removeExercise:hover{
+    color: white;
+    cursor: pointer;
 }
