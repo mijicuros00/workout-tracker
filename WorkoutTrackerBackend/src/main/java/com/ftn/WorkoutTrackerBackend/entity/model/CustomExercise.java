@@ -19,8 +19,10 @@ public class CustomExercise {
     private String name;
     private String description;
 
+    @ElementCollection
+    @CollectionTable(name = "custom_exercise_images", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "image", columnDefinition = "MEDIUMBLOB")
-    private String image;
+    private List<String> images;
 
     @ManyToMany
     private List<MuscleGroup> muscleGroups;

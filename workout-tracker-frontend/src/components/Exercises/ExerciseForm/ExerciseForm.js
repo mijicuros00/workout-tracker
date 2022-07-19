@@ -12,7 +12,7 @@ const ExerciseForm = () =>{
     const [description, setDescription] = useState("");
     const [muscleGroups, setMuscleGroups] = useState([]);
     const [selectedMusleGroups, setSelectedMusleGroups] = useState([]);
-    const [image, setImage] = useState("");
+    const [images, setImages] = useState([]);
 
     let navigate  = useNavigate();
 
@@ -47,7 +47,7 @@ const ExerciseForm = () =>{
 
         reader.onload = function (){
             let imageBlob = reader.result.split(",")[1];
-            setImage(imageBlob);
+            images.push(imageBlob)
         }
         reader.onerror = function (error) {
             console.log('Error: ', error);
@@ -67,7 +67,7 @@ const ExerciseForm = () =>{
         let data ={
             name,
             description,
-            image,
+            images,
             selectedMusleGroups
         }
         ExerciseService.create(data)
@@ -98,7 +98,7 @@ const ExerciseForm = () =>{
                     <TextArea title="description" value={description} setValue={descriptionChangeHandler} />
                     {checkboxes}
                     <input type="file" title="Upload a picture" onChange={uploadImageHandler}/>
-                    {image === "" ? null : <img style={{maxWidth: "100%", objectFit: "cover"}} src={"data:image/png;base64, " + image} alt="Exercise picture"/>}
+                    {images.map(image => <img style={{maxWidth: "100%", objectFit: "cover", marginBottom: "20px"}} src={"data:image/png;base64, " + image} alt="Exercise picture"/>)}
                     <input type="submit" value="Create exercise"/>
                 </form>
             </main>

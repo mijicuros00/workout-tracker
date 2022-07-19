@@ -17,10 +17,7 @@ const create = (data) =>{
     formData.append('name', data.name);
     formData.append('description', data.description);
     formData.append('muscleGroupsIdList', data.selectedMusleGroups);
-
-    if(data.image !== ""){
-        formData.append('image', data.image);
-    }
+    formData.append('images', data.images);
 
     return axios
         .post("/exercises", formData,{ headers: { "Content-type": "multipart/form-data" }})

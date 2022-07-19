@@ -10,6 +10,7 @@ const ExerciseDetails = () =>{
 
     const [isLoading, setIsLoading] = useState(false);
     const [exercise, setExercise] = useState({});
+    const [images, setImages] = useState([]);
     const [muscleGroups, setMuscleGroups] = useState([]);
 
     const { id } = useParams();
@@ -23,6 +24,7 @@ const ExerciseDetails = () =>{
         ExerciseService.getOne(id, isCustom)
             .then(response => {
                 setExercise(response.data);
+                setImages(response.data.images);
                 console.log(response.data);
                 setMuscleGroups(response.data.muscleGroups);
                 setIsLoading(false);
@@ -35,10 +37,6 @@ const ExerciseDetails = () =>{
 
     let groups = muscleGroups.map(group => group.name + ", ").toString();
 
-    let image = null;
-    if(exercise.image !== "" && exercise.image !== null){
-        image = <img style={{maxWidth: "100%", objectFit: "cover"}} src={"data:image/png;base64, " + exercise.image} alt="Exercise picture"/>;
-    }
 //TODO: centriraj sliku
     return(
         <StandardLayout>
@@ -48,7 +46,7 @@ const ExerciseDetails = () =>{
                 <p>{exercise.description}</p>
                 <h1>{isCustom}</h1>
                 <p>This exercises activates these muscles: {groups.substr(0, groups.length-2)}</p>
-                {image}
+                {images.map(image => <img style={{maxWidth: "100%", objectFit: "cover", marginBottom: "20px"}} src={"data:image/png;base64, " + image} alt="Exercise picture"/>)}
             </main>
         </StandardLayout>
     );

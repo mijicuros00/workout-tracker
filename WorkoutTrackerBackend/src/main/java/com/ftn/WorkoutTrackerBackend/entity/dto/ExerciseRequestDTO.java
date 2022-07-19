@@ -11,7 +11,7 @@ public class ExerciseRequestDTO {
     private Long id;
     private String name;
     private String description;
-    private String image;
+    private List<String> images;
     private List<Long> muscleGroupsIdList;
 
     @Override
@@ -20,7 +20,7 @@ public class ExerciseRequestDTO {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", picutre='" + image + '\'' +
+                ", images='" + images + '\'' +
                 ", muscleGroupsIdList=" + muscleGroupsIdList +
                 '}';
     }

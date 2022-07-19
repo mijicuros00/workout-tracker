@@ -17,7 +17,7 @@ public class ExerciseMapper {
                 .id(exerciseDTO.getId())
                 .name(exerciseDTO.getName())
                 .description(exerciseDTO.getDescription())
-                .image(exerciseDTO.getImage())
+                .images(exerciseDTO.getImages())
                 .muscleGroups(exerciseDTO.getMuscleGroups())
                 .build();
     }
@@ -27,7 +27,7 @@ public class ExerciseMapper {
                 .id(exercise.getId())
                 .name(exercise.getName())
                 .description(exercise.getDescription())
-                .image(exercise.getImage())
+                .images(exercise.getImages())
                 .muscleGroups(exercise.getMuscleGroups())
                 .custom(false)
                 .build();
@@ -38,7 +38,7 @@ public class ExerciseMapper {
                 .id(exercise.getId())
                 .name(exercise.getName())
                 .description(exercise.getDescription())
-                .image(exercise.getImage())
+                .images(exercise.getImages())
                 .muscleGroups(exercise.getMuscleGroups())
                 .custom(true)
                 .build();
@@ -48,7 +48,7 @@ public class ExerciseMapper {
         return Exercise.builder()
                 .name(exerciseRequestDTO.getName())
                 .description(exerciseRequestDTO.getDescription())
-                .image(exerciseRequestDTO.getImage())
+                .images(exerciseRequestDTO.getImages())
                 .muscleGroups(muscleGroups)
                 .build();
     }
@@ -57,7 +57,7 @@ public class ExerciseMapper {
         return CustomExercise.builder()
                 .name(exerciseRequestDTO.getName())
                 .description(exerciseRequestDTO.getDescription())
-                .image(exerciseRequestDTO.getImage())
+                .images(exerciseRequestDTO.getImages())
                 .muscleGroups(muscleGroups)
                 .user(user)
                 .build();
