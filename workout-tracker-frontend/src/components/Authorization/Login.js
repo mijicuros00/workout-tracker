@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import axios from "./AuthAxios";
 import ClipLoader from "react-spinners/ClipLoader";
 import authService from "../../services/auth-service";
+import jwtService from "../../services/jwt-service";
 
 const Login = () =>{
 
@@ -13,6 +14,14 @@ const Login = () =>{
     const [isLoading, setIsLoading] = useState(false);
 
     let navigate  = useNavigate();
+
+    useEffect(() =>{
+        if(jwtService.getRoleFromJwt() === "ROLE_USER")
+            navigate("/profile");
+
+        if(jwtService.getRoleFromJwt() === "ROLE_ADMINISTRATOR")
+            navigate("/exercises");
+    }, [])
 
     const emailChangeHandler = e =>{
         setEmail(e.target.value);
@@ -53,7 +62,10 @@ const Login = () =>{
             .then(response => {
                 if(response){
                     setIsLoading(false);
-                    navigate("/profile");
+                    if(jwtService.getRoleFromJwt() === "ROLE_USER"){
+                        navigate("/profile");
+                    }
+                    navigate("/exercises")
                     return;
                 }
                 setIsLoading(false);

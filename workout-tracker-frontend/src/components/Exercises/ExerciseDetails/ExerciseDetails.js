@@ -5,6 +5,7 @@ import StandardLayout from "../../layout/StandardLayout";
 import classes from "../Exercises.module.css";
 import ClipLoader from "react-spinners/ClipLoader";
 import Exercise from "../Exercise/Exercise";
+import jwtService from "../../../services/jwt-service";
 
 const ExerciseDetails = () =>{
 
@@ -19,6 +20,10 @@ const ExerciseDetails = () =>{
     let navigate = useNavigate();
 
     useEffect(() =>{
+
+        if(jwtService.getRoleFromJwt() === null)
+            navigate("/login");
+
         console.log(isCustom);
         setIsLoading(true);
         ExerciseService.getOne(id, isCustom)

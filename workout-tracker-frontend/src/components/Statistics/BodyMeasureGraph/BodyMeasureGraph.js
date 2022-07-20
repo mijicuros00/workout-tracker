@@ -13,6 +13,7 @@ import { Line } from 'react-chartjs-2';import {
     Tooltip,
     Legend,
 } from 'chart.js';
+import jwtService from "../../../services/jwt-service";
 
 
 const BodyMeasureGraph = () =>{
@@ -21,8 +22,16 @@ const BodyMeasureGraph = () =>{
     const [name, setName] = useState("");
 
     let {id} = useParams();
+    let navigate = useNavigate();
 
     useEffect(() =>{
+
+        if(jwtService.getRoleFromJwt() === null)
+            navigate("/login");
+
+        if(jwtService.getRoleFromJwt() === "ROLE_ADMINISTRATOR")
+            navigate("/exercises");
+
         BodyMeasureService.getById(id)
             .then(response =>{
                 if(response.data){

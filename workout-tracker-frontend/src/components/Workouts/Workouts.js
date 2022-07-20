@@ -4,12 +4,20 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import WorkoutService from "../../services/workout-service";
 import Workout from "./Workout/Workout";
+import jwtService from "../../services/jwt-service";
 
 const Workouts = () =>{
 
     const [workouts, setWorkouts] = useState([]);
 
     useEffect(() =>{
+
+        if(jwtService.getRoleFromJwt() === null)
+            navigate("/login");
+
+        if(jwtService.getRoleFromJwt() === "ROLE_ADMINISTRATOR")
+            navigate("/exercises");
+
         WorkoutService.getAll()
             .then(response => setWorkouts(response))
             .catch(err => alert("There was an error while loading your workouts"))

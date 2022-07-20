@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import ProfilePage from "./components/Profile/ProfilePage";
 import Login from "./components/Authorization/Login";
 import Registration from "./components/Authorization/Registration";
@@ -13,11 +13,16 @@ import WorkoutDetails from "./components/Workouts/WorkoutDetails/WorkoutDetails"
 import CalculatorsPage from "./components/Calculators/CalculatorsPage";
 import StatisticsPage from "./components/Statistics/StatisticsPage";
 import BodyMeasureGraph from "./components/Statistics/BodyMeasureGraph/BodyMeasureGraph";
+import routeService from "./services/route-service";
 
 function App() {
   return (
     <BrowserRouter>
         <Routes>
+            {/*{routeService.getAllowedRoutes().map(route => <Route path={route.path} element={route.element} exact /> )}*/}
+            {/*<Route path="/" element={<Navigate to={routeService.redirectRoutes()} replace/>} exact/>*/}
+            {/*<Route path="*" element={<Navigate to={routeService.redirectRoutes()} replace/>} />*/}
+            <Route path="/" element={<Navigate to={routeService.redirectRoutes()} replace/>} exact/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/registration" element={<Registration/>}/>
             <Route path="/profile" element={<ProfilePage/>}/>
@@ -31,6 +36,7 @@ function App() {
             <Route path="/calculators" element={<CalculatorsPage />} exact/>
             <Route path="/statistics" element={<StatisticsPage />} exact/>
             <Route path="/statistics/:id" element={<BodyMeasureGraph />} exact/>
+            <Route path="*" element={<Navigate to={routeService.redirectRoutes()} replace/>} />
         </Routes>
     </BrowserRouter>
   );

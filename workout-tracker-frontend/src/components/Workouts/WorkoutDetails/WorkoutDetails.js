@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import WorkoutService from "../../../services/workout-service";
 import {useNavigate, useParams} from "react-router-dom";
 import PerformedExercises from "../PerformedExercises/PerformedExercises";
+import jwtService from "../../../services/jwt-service";
 
 const kgLbsRatio = 2.2046;
 
@@ -17,6 +18,13 @@ const WorkoutDetails = () =>{
     let date = new Date(dateOfWorkout);
 
     useEffect(() =>{
+
+        if(jwtService.getRoleFromJwt() === null)
+            navigate("/login");
+
+        if(jwtService.getRoleFromJwt() === "ROLE_ADMINISTRATOR")
+            navigate("/exercises");
+
         WorkoutService.getOne(id)
             .then(response => {
                 setDateOfWorkout(response.dateOfWorkout);

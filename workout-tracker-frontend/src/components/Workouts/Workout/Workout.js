@@ -1,7 +1,6 @@
 import {Col, Row} from "react-bootstrap";
 import classes from "../Workouts.module.css";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
 
 const Workout = props =>{
 

@@ -4,6 +4,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import UserService from "../../../services/user-service";
+import jwtService from "../../../services/jwt-service";
 
 const kgLbsRatio = 2.2046;
 const cmInchRatio = 2.54;
@@ -22,6 +23,13 @@ const ProfileUpdate = () =>{
     let navigate  = useNavigate();
 
     useEffect(() => {
+
+        if(jwtService.getRoleFromJwt() === null)
+            navigate("/login");
+
+        if(jwtService.getRoleFromJwt() === "ROLE_ADMINISTRATOR")
+            navigate("/exercises");
+
         setIsLoading(true);
         UserService.getUserFromToken()
             .then(response =>{

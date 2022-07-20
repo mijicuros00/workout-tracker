@@ -3,6 +3,8 @@ import StandardLayout from "../layout/StandardLayout";
 import {useEffect, useState} from "react";
 import BodyMeasureService from "../../services/body-measures-service";
 import BodyMeasure from "./BodyMeasure/BodyMeasure";
+import {useNavigate} from "react-router-dom";
+import jwtService from "../../services/jwt-service";
 
 const StatisticsPage = () =>{
 
@@ -10,7 +12,16 @@ const StatisticsPage = () =>{
     const [name, setName] = useState("");
     const [value, setValue] = useState("");
 
+    let navigate = useNavigate();
+
     useEffect(() =>{
+
+        if(jwtService.getRoleFromJwt() === null)
+            navigate("/login");
+
+        if(jwtService.getRoleFromJwt() === "ROLE_ADMINISTRATOR")
+            navigate("/exercises");
+
         BodyMeasureService.getAll()
             .then(response =>{
                 if(response.data){

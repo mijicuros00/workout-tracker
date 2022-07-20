@@ -5,6 +5,7 @@ import TextArea from "../../util/TextArea";
 import MuscleGroupService from "../../../services/muscle-group-service";
 import ExerciseService from "../../../services/exercise-service";
 import {useNavigate} from "react-router-dom";
+import jwtService from "../../../services/jwt-service";
 
 const ExerciseForm = () =>{
 
@@ -17,6 +18,9 @@ const ExerciseForm = () =>{
     let navigate  = useNavigate();
 
     useEffect(() => {
+        if(jwtService.getRoleFromJwt() === null)
+            navigate("/login");
+
         MuscleGroupService.getAll()
             .then(response => {
                 setMuscleGroups(response.data);

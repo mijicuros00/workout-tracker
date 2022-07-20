@@ -8,6 +8,7 @@ import MuscleGroupService from "../../../services/muscle-group-service";
 import ExerciseService from "../../../services/exercise-service";
 import PerformedExercises from "../PerformedExercises/PerformedExercises";
 import WorkoutService from "../../../services/workout-service";
+import jwtService from "../../../services/jwt-service";
 
 const kgLbsRatio = 2.2046;
 
@@ -25,6 +26,13 @@ const NewWorkout = () =>{
     let navigate = useNavigate();
 
     useEffect(() => {
+
+        if(jwtService.getRoleFromJwt() === null)
+            navigate("/login");
+
+        if(jwtService.getRoleFromJwt() === "ROLE_ADMINISTRATOR")
+            navigate("/exercises");
+
         setIsLoading(true);
         MuscleGroupService.getAll()
             .then(response => {

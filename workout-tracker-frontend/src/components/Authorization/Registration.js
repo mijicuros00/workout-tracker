@@ -1,9 +1,10 @@
 import classes from "./authorization.module.css";
 import {Link, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "./AuthAxios";
 import ClipLoader from "react-spinners/ClipLoader";
 import authService from "../../services/auth-service";
+import jwtService from "../../services/jwt-service";
 
 const kgLbsRatio = 2.2046;
 const cmInchRatio = 2.54;
@@ -23,6 +24,14 @@ const Registration = (props) =>{
 
     const [isLoading, setIsLoading] = useState(false);
     let navigate  = useNavigate();
+
+    useEffect(() =>{
+        if(jwtService.getRoleFromJwt() === "ROLE_USER")
+            navigate("/profile");
+
+        if(jwtService.getRoleFromJwt() === "ROLE_ADMINISTRATOR")
+            navigate("/exercises");
+    }, [])
 
     const firstNameChangeHandler = e =>{
         setFirstName(e.target.value);

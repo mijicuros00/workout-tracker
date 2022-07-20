@@ -2,10 +2,11 @@ import StandardLayout from "../layout/StandardLayout";
 import classes from './ProfilePage.module.css';
 import {useEffect, useState} from "react";
 import {Button} from 'react-bootstrap';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import UserService from "../../services/user-service";
 import ProfileSettings from "./ProfileSettings";
+import jwtService from "../../services/jwt-service";
 
 const kgLbsRatio = 2.2046;
 const cmInchRatio = 2.54;
@@ -15,8 +16,16 @@ const ProfilePage = () =>{
     const [unit, setUnit] = useState("metric");
     const [isLoading, setIsLoading] = useState(false);
     const[user, setUser] = useState({});
+    let navigate  = useNavigate()
 
     useEffect(() => {
+
+        if(jwtService.getRoleFromJwt() === null)
+            navigate("/login");
+
+        if(jwtService.getRoleFromJwt() === "ROLE_ADMINISTRATOR")
+            navigate("/exercises");
+
         setIsLoading(true);
         UserService.getUserFromToken()
             .then(res => {

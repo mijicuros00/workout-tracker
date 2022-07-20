@@ -7,6 +7,7 @@ import classes from './Exercises.module.css'
 import MuscleGroupService from "../../services/muscle-group-service";
 import {useNavigate} from "react-router-dom";
 import Exercises from "./Exercises";
+import jwtService from "../../services/jwt-service";
 
 const ExercisesPage = () =>{
 
@@ -23,6 +24,10 @@ const ExercisesPage = () =>{
 
     useEffect(() => {
         setIsLoading(true);
+
+        if(jwtService.getRoleFromJwt() === null)
+            navigate("/login");
+
         MuscleGroupService.getAll()
             .then(response => {
                 setMuscleGroups(response.data);
