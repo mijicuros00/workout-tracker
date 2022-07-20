@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,7 @@ public class ExerciseController {
     @Autowired
     private UserService userService;
 
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMINISTRATOR')")
     @GetMapping
     public ResponseEntity<List<ExerciseDTO>> getAll(Pageable pageable, @RequestParam(value = "search", defaultValue = "") String search, @RequestParam(required = false) Long muscleGroupId){
 
@@ -90,7 +92,7 @@ public class ExerciseController {
         return new ResponseEntity<>(exerciseDTOList, responseHeaders, HttpStatus.OK);
     }
 
-
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMINISTRATOR')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<ExerciseDTO> getOne(@PathVariable Long id, @RequestParam boolean custom){
 
@@ -119,6 +121,7 @@ public class ExerciseController {
         return new ResponseEntity<>(searchedExercise, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMINISTRATOR')")
     @PostMapping(consumes = { "multipart/form-data" })
     @Transactional
     public ResponseEntity<Long> createExercise(@ModelAttribute ExerciseRequestDTO exerciseRequestDTO){

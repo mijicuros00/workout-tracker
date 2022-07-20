@@ -9,6 +9,7 @@ import com.ftn.WorkoutTrackerBackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class BodyMeasureController {
     @Autowired
     private UserService userService;
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping
     public ResponseEntity<List<BodyMeasureDTO>> getAll(){
         User user = userService.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -39,6 +41,7 @@ public class BodyMeasureController {
         return new ResponseEntity<>(BodyMeasureMapper.mapListToDTO(bodyMeasures), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<List<BodyMeasureDTO>> getByName(@PathVariable Long id){
         User user = userService.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -53,6 +56,7 @@ public class BodyMeasureController {
         return new ResponseEntity<>(BodyMeasureMapper.mapListToDTO(bodyMeasures), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping
     @Transactional
     public ResponseEntity<BodyMeasureDTO> create(@RequestBody BodyMeasureDTO bodyMeasureDTO){

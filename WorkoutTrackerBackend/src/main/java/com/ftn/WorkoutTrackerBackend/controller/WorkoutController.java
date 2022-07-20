@@ -12,6 +12,7 @@ import com.ftn.WorkoutTrackerBackend.service.WorkoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class WorkoutController {
     @Autowired
     private WorkingSetService workingSetService;
 
-
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping
     public ResponseEntity<List<WorkoutDTO>> getAllUsersWorkouts(){
         User user = userService.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -48,6 +49,7 @@ public class WorkoutController {
         return new ResponseEntity<>(WorkoutMapper.mapListToDTO(workouts), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<WorkoutDTO> getOne(@PathVariable Long id){
         User user = userService.findUserByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -63,6 +65,7 @@ public class WorkoutController {
         return new ResponseEntity<>(WorkoutMapper.mapDTO(workout), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping
     @Transactional
     public ResponseEntity<Long> createWorkout(@RequestBody WorkoutDTO workoutDTO){
@@ -81,6 +84,7 @@ public class WorkoutController {
 
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping(value = "/{id}")
     @Transactional
     public ResponseEntity<WorkoutDTO> updateWorkout(@PathVariable Long id, @RequestBody WorkoutDTO workoutDTO){
@@ -108,6 +112,7 @@ public class WorkoutController {
 
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @Transactional
     @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteWorkout(@PathVariable Long id){
