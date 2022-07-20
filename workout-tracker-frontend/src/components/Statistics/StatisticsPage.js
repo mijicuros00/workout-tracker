@@ -59,9 +59,9 @@ const StatisticsPage = () =>{
                     <form className={classes.form} onSubmit={submitHandler}>
                         <h3>Add a body measurement</h3>
                         <label>Measurement name</label>
-                        <input type="text" placeholder="Name" value={name} onChange={nameChangeHandler}/>
+                        <input className={classes.input} type="text" placeholder="Name" value={name} onChange={nameChangeHandler}/>
                         <label>Measurement value</label>
-                        <input type="number" placeholder="Value" value={value} onChange={valueChangeHandler}/>
+                        <input style={{backgroundColor: 'white', color: 'black', border: '1px solid black'}} type="number" placeholder="Value" value={value} onChange={valueChangeHandler}/>
                         <input type="submit" value="Submit" className={classes.submitButton} />
                     </form>
                 <h3 className={classes.title}>Your body measures are displayed below</h3>

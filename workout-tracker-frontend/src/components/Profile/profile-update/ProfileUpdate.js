@@ -131,10 +131,10 @@ const ProfileUpdate = () =>{
                     <input type="text" placeholder="Your first name" value={firstName} onChange={firstNameChangeHandler}/>
                     <input type="text" placeholder="Your last name" value={lastName} onChange={lastNameChangeHandler}/>
                     <input type="email" placeholder="Your email" value={email} onChange={emailChangeHandler} readOnly/>
-                    <input type="number" step={1} placeholder="Your Age" value={age} onChange={ageChangeHandler}/>
+                    <input style={{backgroundColor: 'white', color: 'black', border: '1px solid black'}} type="number" step={1} placeholder="Your Age" value={age} onChange={ageChangeHandler}/>
                     <h5>You choose to record weight and height in {localStorage.getItem("units") === "metric" ? "Metric system" : "Imperial system"}</h5>
-                    <input type="number" step={1} placeholder="Your weight" value={weight} onChange={weightChangeHandler}/>
-                    <input type="number" step={1} placeholder="Your height" value={height} onChange={heightChangeHandler}/>
+                    <input style={{backgroundColor: 'white', color: 'black', border: '1px solid black'}} type="number" step={1} placeholder="Your weight" value={weight} onChange={weightChangeHandler}/>
+                    <input style={{backgroundColor: 'white', color: 'black', border: '1px solid black'}} type="number" step={1} placeholder="Your height" value={height} onChange={heightChangeHandler}/>
                     <input type="submit" value="Submit" disabled={isLoading}/>
                 </form>}
         </main>

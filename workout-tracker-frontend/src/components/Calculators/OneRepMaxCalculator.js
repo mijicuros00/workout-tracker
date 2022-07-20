@@ -29,8 +29,8 @@ const OneRepMaxCalculator = () =>{
     return(
         <section className={classes.calculator}>
             <h2>One rep max calculator</h2>
-            <input type="number" placeholder={`weight in ${localStorage.getItem("units") === "metric" ? "kgs" : "lbs"}`} value={weight} onChange={weightChangeHandler}/>
-            <input type="number" placeholder="Reps" value={reps} onChange={repsChangeHandler}/>
+            <input style={{backgroundColor: 'white', color: 'black', border: '1px solid black'}} type="number" placeholder={`weight in ${localStorage.getItem("units") === "metric" ? "kgs" : "lbs"}`} value={weight} onChange={weightChangeHandler}/>
+            <input style={{backgroundColor: 'white', color: 'black', border: '1px solid black'}} type="number" placeholder="Reps" value={reps} onChange={repsChangeHandler}/>
             <input type="submit" value="Calculate" className={classes.calculateButton} onClick={calculateHandler} />
             {oneRepMax === 0 ? null : <p>You can approximately lift {oneRepMax} for one rep.</p>}
         </section>

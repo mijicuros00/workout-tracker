@@ -20,7 +20,8 @@ const PerformedExercise = props =>{
     let titleStyle = null;
     if(props.details){
         titleStyle = {
-            cursor : 'pointer'
+            cursor : 'pointer',
+            color: 'white'
         }
     }
 

@@ -134,7 +134,7 @@ const Registration = (props) =>{
             <h1 className={classes.textCenter}>Registration</h1>
             <h3 className={classes.textCenter}>Welcome, please register to continue to app</h3>
             <h3 id="register" className={classes.textCenter}>If you already have an account, <Link to="/login" style={linkStyle}>go to login page</Link> </h3>
-            {isLoading ? <ClipLoader color={"white"} loading={isLoading} css={loaderCss} size={150} /> :
+            {isLoading ? <ClipLoader color={"black"} loading={isLoading} css={loaderCss} size={150} /> :
                 <form className={classes.form} onSubmit={submitHandler}>
                     <input type="text" placeholder="Your first name" value={firstName} onChange={firstNameChangeHandler}/>
                     <input type="text" placeholder="Your last name" value={lastName} onChange={lastNameChangeHandler}/>

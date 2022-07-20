@@ -6,6 +6,11 @@
 .title{
     font-weight: bold;
     margin-bottom: 50px;
+    color: black;
+}
+
+h3{
+    color: black;
 }
 
 .section{
@@ -14,6 +19,14 @@
     font-size: 20px;
 }
 
+label{
+    color: black;
+}
+
 input[type = 'radio']{
     margin-bottom: 20px;
+}
+
+.settings{
+    color: black;
 }

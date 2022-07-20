@@ -5,33 +5,31 @@
 
 .title{
     text-align: center;
+    color: black;
 }
 
 .newButton{
-    color: white;
+    color: black;
     border-radius: 7px;
     margin: 15px auto !important;
     padding: 10px;
     text-align: center;
-    background-color: #3b3b3b;
+    background-color: white;
     box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
     -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
     -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
 }
 
 .newButton:hover{
-    box-shadow: 0px 0px 4px 1px white;
-    -webkit-box-shadow: 0px 0px 4px 1px white;
-    -moz-box-shadow: 0px 0px 4px 1px white;
+    box-shadow: 0px 0px 4px 1px black;
+    -webkit-box-shadow: 0px 0px 4px 1px black;
+    -moz-box-shadow: 0px 0px 4px 1px black;
 }
 
 .performedExercise{
     text-align: center;
     padding: 10px;
-    background-color: #3b3b3b;
-    box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
-    -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
-    -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    background-color: #8B8B8B;
     border-radius: 15px;
     margin-bottom: 20px;
     position: relative;
@@ -40,8 +38,8 @@
 .addSetButton{
     margin-bottom: 10px;
     border-radius: 7px;
-    background-color: #3b3b3b;
-    color: white;
+    background-color: white;
+    color: black;
     box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
     -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
     -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
@@ -97,7 +95,8 @@ input[type = "number"]:active{
     box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
     -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
     -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
-    color: #000000;
+    background-color: #8B8B8B;
+    color: white;
 }
 
 .workout:hover{
@@ -137,12 +136,18 @@ input[type = "number"]:active{
 }
 
 .removeExercise:hover{
-    color: white;
+    color: black;
     cursor: pointer;
 }
 
 .datePicker{
     padding: 5px;
-    background-color: #3b3b3b;
-    color: white;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.weightAndReps{
+    background-color: white;
+    color: black;
 }

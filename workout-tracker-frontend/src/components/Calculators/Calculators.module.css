@@ -6,6 +6,7 @@
     box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
     -webkit-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
     -moz-box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
+    background-color: #8B8B8B;
     color: #000000;
 }
 
@@ -13,10 +14,10 @@ input{
     margin-bottom: 10px;
     margin-top: 0;
     border-radius: 15px;
-    background-color: #3b3b3b;
-    border: 1px solid white;
+    background-color: white;
+    border: 1px solid black;
     padding: 10px;
-    color: white;
+    color: black;
 }
 
 .calculateButton{
@@ -29,8 +30,8 @@ input{
 }
 
 .select{
-    background-color: #3b3b3b;
-    color: white;
+    background-color: white;
+    color: black;
     border-radius: 15px;
 }
 

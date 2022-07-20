@@ -17,7 +17,7 @@ const Exercises = props =>{
                 {props.muscleGroups.map(muscleGroup => <option className={classes.option} value={muscleGroup.id}>{muscleGroup.name}</option> )}
             </select>
             {!props.pick ? <button className={classes.newButton} onClick={props.newExerciseButtonHandler}>Create new exercise</button> : null}
-            {props.isLoading ? <ClipLoader color={"white"} loading={props.isLoading} css={props.loaderCss} size={150} /> : exerciseList }
+            {props.isLoading ? <ClipLoader color={"black"} loading={props.isLoading} css={props.loaderCss} size={150} /> : exerciseList }
         </>
     );
 }

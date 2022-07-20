@@ -2,7 +2,7 @@ import StandardLayout from "../../layout/StandardLayout";
 import classes from "../Statistics.module.css";
 import {useEffect, useState} from "react";
 import BodyMeasureService from "../../../services/body-measures-service";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { Line } from 'react-chartjs-2';import {
     Chart as ChartJS,
     CategoryScale,

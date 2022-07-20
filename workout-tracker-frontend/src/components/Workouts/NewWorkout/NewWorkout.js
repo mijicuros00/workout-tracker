@@ -140,12 +140,12 @@ const NewWorkout = () =>{
             marginTop: '10vh',
             marginBottom: '5vh',
             transform: 'translate(-50%, -50%)',
-            backgroundColor: "#3b3b3b",
+            backgroundColor: "#8B8B8B",
         },
         overlay: {
             position: 'fixed',
             inset: "0px",
-            backgroundColor: "rgba(119, 119, 119, 0.75)",
+            backgroundColor: "white",
             overflowY: "auto"
         }
     };
@@ -154,7 +154,7 @@ const NewWorkout = () =>{
         <StandardLayout>
             <main className={classes.main} style={{minHeight: "90vh"}}>
                 <h1 className={classes.title}>Create a new workout</h1>
-                <input type="date" value={dateOfWorkout} onChange={dateChangeHandler}/>
+                <input type="date" value={dateOfWorkout} onChange={dateChangeHandler} className={classes.datePicker}/>
                 <button className={classes.newButton} onClick={openModal}>Add exercise</button>
                 <Modal style={customStyles} isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
                     <Exercises searchInputValue={searchInputValue} searchChangeHandler={searchChangeHandler}

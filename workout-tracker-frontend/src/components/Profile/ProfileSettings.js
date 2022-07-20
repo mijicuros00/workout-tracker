@@ -5,7 +5,7 @@ const ProfileSettings = props =>{
     <section className={classes.section}>
         <h2 className={classes.title}>Profile settings</h2>
         <label>Select unit type:</label>
-        <div>
+        <div className={classes.settings}>
             Metric(Kgs and centimeters) <input type="radio" value="metric" name="unit" onClick={() => {
             localStorage.setItem("units", "metric");
             props.set("metric");

@@ -28,7 +28,7 @@ const PerformedExercises = props =>{
             marginRight: '-50%',
             marginTop: '4vh',
             transform: 'translate(-50%, -50%)',
-            backgroundColor: "#3b3b3b",
+            backgroundColor: "#8B8B8B",
         },
         overlay: {
             position: 'fixed',
@@ -61,9 +61,9 @@ const PerformedExercises = props =>{
                 <form className={classes.addSetForm} onSubmit={submitHandler}>
                     <h3>Adding set</h3>
                     <label>Weight in {localStorage.getItem("units") === "metric" ? "kgs" : "lbs"}</label>
-                    <input type="number" placeholder="Weight" value={weight} onChange={weightChangeHandler}/>
+                    <input className={classes.weightAndReps} type="number" placeholder="Weight" value={weight} onChange={weightChangeHandler}/>
                     <label>Reps</label>
-                    <input type="number" placeholder="Reps" value={reps} onChange={repsChangeHandler}/>
+                    <input className={classes.weightAndReps} type="number" placeholder="Reps" value={reps} onChange={repsChangeHandler}/>
                     <input type="submit" value="Submit" className={classes.submitSetButton} />
                 </form>
             </Modal>
