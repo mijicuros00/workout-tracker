@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 const Exercise = props =>{
 
     let navigate = useNavigate();
-    let muscleGroups = props.muscleGroups.map(group => group.name + ", ").toString();
+    let muscleGroups = props.muscleGroups.map(group => group.name + " ").toString();
 
     const clickHandler = () =>{
         navigate(`/exercises/${props.id}`, {state : {isCustom : props.isCustom}});
@@ -29,11 +29,14 @@ const Exercise = props =>{
                                 <span className={classes.description}>{props.description}</span>
                           </Col> : null}
             <Col lg={4} md={3} sm={12} xs={12} className="my-auto">
-                <span>{muscleGroups.substr(0, muscleGroups.length-2)}</span>
+                <span>{muscleGroups.substr(0, muscleGroups.length-1)}</span>
             </Col>
             {props.pick ? <Col lg={4} md={3} sm={12} xs={12} className="my-auto">
                             <button onClick={() => props.pickButtonHandler(exercise)} className={classes.pickButton}>Pick</button>
-                          </Col> : null}
+          </Col> : null}
+            {props.pick ? <Col lg={12} md={3} sm={12} xs={12} className="my-auto">
+                <span>{props.description}</span>
+            </Col> : null}
         </Row>
     );
 }

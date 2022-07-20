@@ -37,7 +37,6 @@ const ExerciseDetails = () =>{
 
     let groups = muscleGroups.map(group => group.name + ", ").toString();
 
-//TODO: centriraj sliku
     return(
         <StandardLayout>
             <main className={classes.main} style={{minHeight: "90vh"}}>

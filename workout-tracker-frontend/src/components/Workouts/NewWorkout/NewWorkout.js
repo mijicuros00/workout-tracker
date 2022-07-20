@@ -129,14 +129,16 @@ const NewWorkout = () =>{
             right: 'auto',
             bottom: 'auto',
             marginRight: '-50%',
-            marginTop: '4vh',
+            marginTop: '10vh',
+            marginBottom: '5vh',
             transform: 'translate(-50%, -50%)',
             backgroundColor: "#3b3b3b",
         },
         overlay: {
             position: 'fixed',
             inset: "0px",
-            backgroundColor: "rgba(119, 119, 119, 0.75)"
+            backgroundColor: "rgba(119, 119, 119, 0.75)",
+            overflowY: "auto"
         }
     };
 

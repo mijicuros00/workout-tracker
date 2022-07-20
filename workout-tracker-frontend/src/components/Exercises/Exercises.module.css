@@ -111,7 +111,7 @@ input[type = "text"]{
 }
 
 .pickButton{
-    border-radius: 15px;
+    border-radius: 8px;
     background-color: #3b3b3b;
     color: white;
     box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.7);
@@ -134,5 +134,4 @@ input[type = "text"]{
     input[type = "text"]{
         padding: 10px;
     }
-
 }
