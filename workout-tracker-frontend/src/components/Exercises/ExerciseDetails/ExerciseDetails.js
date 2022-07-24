@@ -48,7 +48,7 @@ const ExerciseDetails = () =>{
                 <h1 className={classes.title}>Exercise details</h1>
                 <h2 className={classes.exerciseName}>{exercise.name}</h2>
                 <p style={{color: 'black'}}>{exercise.description}</p>
-                <p style={{color: 'black'}}>{exercise.description}>This exercises activates these muscles: {groups.substr(0, groups.length-2)}</p>
+                <p style={{color: 'black'}}>This exercises activates these muscles: {groups.substr(0, groups.length-2)}</p>
                 {images.map(image => <img style={{maxWidth: "100%", objectFit: "cover", marginBottom: "20px"}} src={"data:image/png;base64, " + image} alt="Exercise picture"/>)}
             </main>
         </StandardLayout>
